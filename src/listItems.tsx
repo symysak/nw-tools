@@ -31,7 +31,7 @@ export const mainListItems = (
             <ListItemIcon>
                 <CalculateIcon />
             </ListItemIcon>
-            <ListItemText primary="MTU計算機" />
+            <ListItemText primary="トンネルMTU計算機" />
         </ListItemButton>
     </React.Fragment>
 );
