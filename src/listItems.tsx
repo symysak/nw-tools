@@ -4,6 +4,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import TocIcon from '@mui/icons-material/Toc';
 import HomeIcon from '@mui/icons-material/Home';
+import CalculateIcon from '@mui/icons-material/Calculate';
 
 import { Link } from 'react-router-dom';
 
@@ -25,6 +26,13 @@ export const mainListItems = (
             <ListItemText primary="IPアドレス個数表" />
         </ListItemButton>
         
+        {/* MTU計算機 */}
+        <ListItemButton component={Link} to={"/mtu-calculator"}>
+            <ListItemIcon>
+                <CalculateIcon />
+            </ListItemIcon>
+            <ListItemText primary="MTU計算機" />
+        </ListItemButton>
     </React.Fragment>
 );
 

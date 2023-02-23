@@ -13,16 +13,18 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondaryListItems } from '../listItems';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://tools.suyamas.jp">
-        SUYAMA
-      </Link>{' '}
+      {'© '}
       {new Date().getFullYear()}
+      {' '}
+      <Link color="inherit" href="/">
+        SUYAMA
+      </Link>
       {'.'}
     </Typography>
   );
@@ -74,26 +76,45 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
           width: theme.spacing(9),
         },
       }),
+      ...(!open && {
+        display: 'none',
+      }),
     },
   }),
 );
 
-const mdTheme = createTheme();
 
 type Props = {
-  children: React.ReactNode;
-  title: string;
+  children: React.ReactNode,
+  title: string,
 }
 export default function Dashboard(props: Props) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+        typography: {
+          button: {
+              textTransform: "none"
+          }
+        }
+      }),
+    [prefersDarkMode],
+  );
+
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
         <AppBar position="absolute" open={open}>
         
           {/* Header */}
@@ -121,9 +142,9 @@ export default function Dashboard(props: Props) {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Network Tools
+              {props.title} - Network Tools
             </Typography>
-          </Toolbar>
+           </Toolbar>
         </AppBar>
         
         <Drawer variant="permanent" open={open}>
@@ -160,7 +181,6 @@ export default function Dashboard(props: Props) {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <p>{props.title}</p>
             {props.children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
