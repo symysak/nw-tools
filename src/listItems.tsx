@@ -18,6 +18,14 @@ export const mainListItems = (
             <ListItemText primary="ホーム" />
         </ListItemButton>
 
+        {/* Ooklaサーバリスト */}
+        <ListItemButton component={Link} to={"/ookla-server-list"}>
+            <ListItemIcon>
+                <TocIcon />
+            </ListItemIcon>
+            <ListItemText primary="Ooklaサーバリスト" />
+        </ListItemButton>
+
         {/* IP Addr個数表 */}
         <ListItemButton component={Link} to={"/ip-addr-table"}>
             <ListItemIcon>
@@ -32,7 +40,8 @@ export const mainListItems = (
                 <CalculateIcon />
             </ListItemIcon>
             <ListItemText primary="トンネルMTU計算機" />
-        </ListItemButton>
+        </ListItemButton>aサーバリスト
+
     </React.Fragment>
 );
 
