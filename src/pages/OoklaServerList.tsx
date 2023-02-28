@@ -23,7 +23,7 @@ const OoklaServerList = () => {
             setData(res.data);
         }
         fetchData();
-    })
+    }, [])
     
     const titleTag="Ooklaサーバリスト-Network Tools|SUYAMA";
 
