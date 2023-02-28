@@ -11,6 +11,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const OoklaServerList = () => {
@@ -24,8 +25,13 @@ const OoklaServerList = () => {
         fetchData();
     })
     
+    const titleTag="Ooklaサーバリスト-Network Tools|SUYAMA";
+
     return (
         <div>
+            <Helmet>
+                <title>{titleTag}</title>
+            </Helmet>
             <Dashboard title="Ooklaサーバリスト" >
                 <p>Ookla Speedtest.netのサーバリストです。
                     speedtest-cliのサーバID指定の際等にお使い下さい</p>

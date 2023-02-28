@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { Helmet } from "react-helmet-async";
 
 // クリップボードにコピー用
 const copyToClipboard = async (text: any) => {
@@ -37,8 +38,12 @@ for (let i = 32; i >= 0; i--) {
 }
 
 function IpAddrTable(){
+    const titleTag="IPアドレス個数表-Network Tools|SUYAMA";
     return (
         <div>
+            <Helmet>
+                <title>{titleTag}</title>
+            </Helmet>
             <Dashboard title="IPアドレス個数表" >
                 <TableContainer component={Paper} sx={{overflow: "auto"}}>
                     <Table size="small" aria-label="a dense table">

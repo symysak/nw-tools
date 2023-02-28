@@ -4,6 +4,7 @@ import Dashboard from "../templates/Dashboard";
 import TextField from '@mui/material/TextField';
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Helmet } from "react-helmet-async";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -41,8 +42,13 @@ function MTUcalculator() {
 
     const [textInput, setTextInput] = React.useState(1500);
 
+    const titleTag="トンネルMTU計算機-Network Tools|SUYAMA";
+
     return (
         <div>
+            <Helmet>
+                <title>{titleTag}</title>
+            </Helmet>
             <Dashboard title="トンネルMTU計算機" >
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
