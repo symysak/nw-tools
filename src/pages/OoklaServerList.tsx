@@ -38,15 +38,20 @@ const OoklaServerList = () => {
                 <p>Ookla Speedtest.netのサーバリストです。
                     speedtest-cliのサーバID指定の際等にお使い下さい</p>
                 <TableContainer component={Paper} sx={{overflow: "auto"}}>
-                    <a>最終更新: {lastUpdated}. 1時間毎に更新しています</a>
+                    <a>最終更新: {lastUpdated}. 1時間毎に更新</a>
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell style={{minWidth:"82px"}}>ID</TableCell>
-                                <TableCell style={{minWidth:"170px"}}>サーバ名</TableCell>
-                                <TableCell style={{minWidth:"154px"}}>ロケーション</TableCell>
+                                <TableCell style={{minWidth:"53px"}}>ID</TableCell>
+                                <TableCell style={{minWidth:"200px"}}>サーバ名</TableCell>
+                                <TableCell style={{minWidth:"117px"}}>ロケーション</TableCell>
+                                <TableCell style={{minWidth:"150px"}}>ウェブサイト</TableCell>
+                                <TableCell style={{minWidth:"50px"}}>測定ボタン</TableCell>
                                 <TableCell style={{minWidth:"154px"}}>ホスト</TableCell>
-                                <TableCell style={{minWidth:"154px"}}>ウェブサイト</TableCell>
+                                <TableCell style={{minWidth:"100px"}}>IPv4 Addr(RDNS)</TableCell>
+                                <TableCell style={{minWidth:"100px"}}>IPv6 Addr(RDNS)</TableCell>
+                                <TableCell style={{minWidth:"50px"}}>IPv4 ASN</TableCell>
+                                <TableCell style={{minWidth:"50px"}}>IPv6 ASN</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -62,12 +67,27 @@ const OoklaServerList = () => {
                                             {row.location}
                                         </TableCell>
                                         <TableCell align="left">
+                                            {row.website}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            <IconButton href={"https://www.speedtest.net/server/" + row.id}></IconButton>
+                                        </TableCell>
+                                        <TableCell align="left">
                                             {row.host}
                                         </TableCell>
                                         <TableCell align="left">
-                                            {row.website}
+                                            {row.ipv4}
                                         </TableCell>
-
+                                        <TableCell align="left">
+                                            {row.ipv6}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {row.ipv4_asn}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {row.ipv6_asn}
+                                        </TableCell>
+                                        
                                 </TableRow>
                             ))}
                         </TableBody>
