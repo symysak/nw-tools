@@ -87,12 +87,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 type Props = {
   children: React.ReactNode,
   title: string,
+  maxWidth?: 'lg' | 'md' | 'sm' | 'xl' | 'xs',
 }
 export default function Dashboard(props: Props) {
   const [open, setOpen] = React.useState(false);
+  const [maxWidth, setMaxWidth] = React.useState('lg' as 'lg' | 'md' | 'sm' | 'xl' | 'xs');
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    if (props.maxWidth) {
+      setMaxWidth(props.maxWidth);
+    }
+  }, [props.maxWidth]);
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -180,7 +188,7 @@ export default function Dashboard(props: Props) {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth={maxWidth} sx={{ mt: 4, mb: 4 }}>
             {props.children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
