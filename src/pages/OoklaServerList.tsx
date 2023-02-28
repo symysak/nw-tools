@@ -12,6 +12,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import SpeedIcon from '@mui/icons-material/Speed';
 
 
 const OoklaServerList = () => {
@@ -70,7 +71,9 @@ const OoklaServerList = () => {
                                             {row.website}
                                         </TableCell>
                                         <TableCell align="left">
-                                            <IconButton href={"https://www.speedtest.net/server/" + row.id}></IconButton>
+                                            <IconButton size="small" href={"https://www.speedtest.net/server/" + row.id}>
+                                                <SpeedIcon fontSize="small" />
+                                            </IconButton>
                                         </TableCell>
                                         <TableCell align="left">
                                             {row.host}
@@ -87,7 +90,7 @@ const OoklaServerList = () => {
                                         <TableCell align="left">
                                             {row.ipv6_asn}
                                         </TableCell>
-                                        
+
                                 </TableRow>
                             ))}
                         </TableBody>
