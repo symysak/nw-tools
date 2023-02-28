@@ -40,7 +40,7 @@ export const mainListItems = (
                 <CalculateIcon />
             </ListItemIcon>
             <ListItemText primary="トンネルMTU計算機" />
-        </ListItemButton>aサーバリスト
+        </ListItemButton>
 
     </React.Fragment>
 );
