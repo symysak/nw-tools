@@ -48,11 +48,11 @@ const OoklaServerList = () => {
                                 <TableCell style={{minWidth:"117px"}}>ロケーション</TableCell>
                                 <TableCell style={{minWidth:"150px"}}>ウェブサイト</TableCell>
                                 <TableCell style={{minWidth:"50px"}}>測定ボタン</TableCell>
-                                <TableCell style={{minWidth:"154px"}}>ホスト</TableCell>
-                                <TableCell style={{minWidth:"100px"}}>IPv4 Addr(RDNS)</TableCell>
-                                <TableCell style={{minWidth:"100px"}}>IPv6 Addr(RDNS)</TableCell>
-                                <TableCell style={{minWidth:"50px"}}>IPv4 ASN</TableCell>
-                                <TableCell style={{minWidth:"50px"}}>IPv6 ASN</TableCell>
+                                <TableCell style={{minWidth:"280px"}}>ホスト</TableCell>
+                                <TableCell style={{minWidth:"300px"}}>IPv4 Addr(RDNS)</TableCell>
+                                <TableCell style={{minWidth:"300px"}}>IPv6 Addr(RDNS)</TableCell>
+                                <TableCell style={{minWidth:"250px"}}>IPv4 ASN</TableCell>
+                                <TableCell style={{minWidth:"250px"}}>IPv6 ASN</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
