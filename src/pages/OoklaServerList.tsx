@@ -16,10 +16,12 @@ import { Helmet } from "react-helmet-async";
 
 const OoklaServerList = () => {
     const [data, setData] = useState([]);
+    const [lastUpdated, setLastUpdated] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios("https://ookla-serverlist-backend.suyamas.jp/api/serverlist");
+            setLastUpdated(res.data.pop().lastUpdated);
             setData(res.data);
         }
         fetchData();
@@ -36,6 +38,7 @@ const OoklaServerList = () => {
                 <p>Ookla Speedtest.netのサーバリストです。
                     speedtest-cliのサーバID指定の際等にお使い下さい</p>
                 <TableContainer component={Paper} sx={{overflow: "auto"}}>
+                    <a>最終更新: {lastUpdated}. 1h毎に更新しています</a>
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
