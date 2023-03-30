@@ -21,7 +21,7 @@ const OoklaServerList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios("https://ookla-serverlist-backend.suyamas.jp/api/serverlist");
+            const res = await axios("https://ookla-serverlist-backend.suyama.ne.jp/api/serverlist");
             setLastUpdated(res.data.pop().lastupdated);
             setData(res.data);
         }
