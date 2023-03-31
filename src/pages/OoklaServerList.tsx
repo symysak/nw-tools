@@ -59,7 +59,7 @@ const OoklaServerList = () => {
                         <TableBody>
                             {data.map((row: any) => (
                                 <TableRow key={row.id} >
-                                        <TableCell align="left">
+                                        <TableCell align="right">
                                             {row.id}
                                             <IconButton size="small" onClick={() => navigator.clipboard.writeText(row.id)}>
                                                 <ContentCopyIcon fontSize="small" />
