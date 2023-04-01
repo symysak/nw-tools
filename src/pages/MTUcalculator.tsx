@@ -193,9 +193,6 @@ function MTUcalculator() {
                         </Item>
                     </Grid>
                 </Grid>
-                <Typography component="p" variant="body2" color="text.secondary" align="center" padding={2}>
-                    プルリクエストは大歓迎です: <Link href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
-                </Typography>
             </Dashboard>
 
         </div>

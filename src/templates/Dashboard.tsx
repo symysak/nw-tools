@@ -19,13 +19,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'© '}
-      {new Date().getFullYear()}
-      {' '}
-      <Link color="inherit" href="/">
-        SUYAMA
-      </Link>
-      {'.'}
+      {'© '} {new Date().getFullYear()} {' '} <Link color="inherit" href="/">SUYAMA</Link>{'.'}
+      <br />
+      {"GitHub: "} <Link color="inherit" href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
     </Typography>
   );
 }
