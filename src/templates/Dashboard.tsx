@@ -144,13 +144,13 @@ export default function Dashboard(props: Props) {
               <MenuIcon />
             </IconButton>
             <Typography
-              component="h1"
+              component="div"
               variant="h6"
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              {props.title} - Network Tools
+              SUYAMA Network Tools
             </Typography>
            </Toolbar>
         </AppBar>
@@ -189,6 +189,16 @@ export default function Dashboard(props: Props) {
         >
           <Toolbar />
           <Container maxWidth={maxWidth} sx={{ mt: 4, mb: 4 }}>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              paddingBottom={3}
+              sx={{ flexGrow: 1 }}
+            >
+              {props.title}
+            </Typography>
             {props.children}
             <Copyright sx={{ pt: 4 }} />
           </Container>

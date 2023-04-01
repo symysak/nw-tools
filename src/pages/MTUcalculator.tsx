@@ -110,12 +110,12 @@ function MTUcalculator() {
             temp.push(
                 <div>
                     <Grid container>
-                        <Grid item xs={10}>
+                        <Grid item xs={8} sm={9} md={10}>
                             <Button variant="contained" fullWidth>
                                 {list[i].name} - {list[i].size}bytes
                             </Button>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={4} sm={3} md={2}>
 
                             {i === 0
                             ? <IconButton disabled size="small">
@@ -159,14 +159,14 @@ function MTUcalculator() {
 
     const [textInput, setTextInput] = React.useState(1500);
 
-    const titleTag="トンネルMTU計算機-Network Tools|SUYAMA";
+    const titleTag="トンネルMTU計算機";
 
     return (
         <div>
             <Helmet>
-                <title>{titleTag}</title>
+                <title>{titleTag + " - Network Tools | SUYAMA"}</title>
             </Helmet>
-            <Dashboard title="トンネルMTU計算機" >
+            <Dashboard title={titleTag} >
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
                         <Item>
@@ -189,34 +189,11 @@ function MTUcalculator() {
                             <p>Header size: {calculateSize("header size", 0, selectedProto)}</p>
                             <p>MTU/MSS: {calculateSize("mtu/mss", textInput, selectedProto)}</p>
                             <p>追加したプロトコル</p>
-                                    {/*
-                                    {selectedProto.map((item: any) => (
-                                        <Grid container spacing={0}>
-                                            <Grid item xs={11}>
-                                                <Button variant="contained" fullWidth>
-                                                    {item.name} - {item.size}bytes
-                                                </Button>
-                                            </Grid>
-                                            <Grid item xs={1}>
-                                                <IconButton>
-                                                    <DeleteIcon fontSize="small" onClick={() => {
-                                                        setSelectedProto(copySelectedProto.filter((a: any) =>  a.id !== item.id));
-                                                    }}/>
-                                                </IconButton>
-                                                <IconButton>
-                                                    <ArrowUpward fontSize="small" onClick={() => {
-                                                        setSelectedProto(copySelectedProto)
-                                                    }}/>
-                                                </IconButton>
-                                            </Grid>
-                                        </Grid>
-                                    ))}
-                                    */}
-                                    <SelectedProtoList list={selectedProto} />
+                                <SelectedProtoList list={selectedProto} />
                         </Item>
                     </Grid>
                 </Grid>
-                <Typography component="p" variant="body2" color="text.secondary" align="center" >
+                <Typography component="p" variant="body2" color="text.secondary" align="center" padding={2}>
                     プルリクエストは大歓迎です: <a href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</a>
                 </Typography>
             </Dashboard>

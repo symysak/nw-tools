@@ -38,18 +38,18 @@ for (let i = 32; i >= 0; i--) {
 }
 
 function IpAddrTable(){
-    const titleTag="IPアドレス個数表-Network Tools|SUYAMA";
+    const titleTag="IPアドレス個数表";
     return (
         <div>
             <Helmet>
-                <title>{titleTag}</title>
+                <title>{titleTag + " - Network Tools | SUYAMA"}</title>
             </Helmet>
-            <Dashboard title="IPアドレス個数表" >
+            <Dashboard title={titleTag} >
                 <TableContainer component={Paper} sx={{overflow: "auto"}}>
                     <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell style={{minWidth:"82px"}}>CIDR</TableCell>
+                                <TableCell style={{minWidth:"85px"}}>CIDR</TableCell>
                                 <TableCell style={{minWidth:"170px"}}>サブネットマスク</TableCell>
                                 <TableCell style={{minWidth:"154px"}}>IPアドレス数</TableCell>
                             </TableRow>
