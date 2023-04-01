@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Dashboard from "../templates/Dashboard";
 import TextField from '@mui/material/TextField';
@@ -194,7 +194,7 @@ function MTUcalculator() {
                     </Grid>
                 </Grid>
                 <Typography component="p" variant="body2" color="text.secondary" align="center" padding={2}>
-                    プルリクエストは大歓迎です: <a href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</a>
+                    プルリクエストは大歓迎です: <Link href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
                 </Typography>
             </Dashboard>
 
