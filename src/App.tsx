@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import OoklaServerList from "./pages/OoklaServerList";
+import OoklaServerList from "./pages/speedtest.net-serverlist";
 import IpAddrTable from "./pages/IpAddrTable";
 import MTUcalculator from "./pages/MTUcalculator";
 
