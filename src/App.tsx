@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="ookla-server-list" element={<OoklaServerList />} />
+                <Route path="/speedtest.net-serverlist" element={<OoklaServerList />} />
                 <Route path="/ip-addr-table" element={<IpAddrTable />} />
                 <Route path="/mtu-calculator" element={<MTUcalculator />} />
             </Routes>
