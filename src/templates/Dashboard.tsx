@@ -16,13 +16,18 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from '../listItems';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-function Copyright(props: any) {
+function FooterContents(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'© '} {new Date().getFullYear()} {' '} <Link color="inherit" href="/">SUYAMA</Link>{'.'}
-      <br />
-      {"GitHub: "} <Link color="inherit" href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
-    </Typography>
+    <div>
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'© '} {new Date().getFullYear()} {' '} <Link color="inherit" href="/">SUYAMA</Link>{'.'}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" align="right">
+        {"連絡先: info[at]suyama.ne.jp"}
+        <br />
+        <Link color="inherit" href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
+      </Typography>
+    </div>
   );
 }
 
@@ -196,7 +201,7 @@ export default function Dashboard(props: Props) {
               {props.title}
             </Typography>
             {props.children}
-            <Copyright sx={{ pt: 4 }} />
+            <FooterContents sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
