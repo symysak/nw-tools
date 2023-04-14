@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import * as React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Helmet } from "react-helmet-async";
-import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import { Add, ArrowDownward, ArrowUpward } from "@mui/icons-material";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -137,7 +137,7 @@ function MTUcalculator() {
                                 {list[i].name} - {list[i].size}bytes
                             </Button>
                         </Grid>
-                        <Grid item xs={4} sm={3} md={2}>
+                        <Grid justifySelf="center" item xs={4} sm={3} md={2}>
 
                             {i === 0
                             ? <IconButton disabled size="small">
@@ -180,6 +180,7 @@ function MTUcalculator() {
     }
 
     const [textInput, setTextInput] = React.useState(1500);
+    const [customProtoSize, setCustomProtoSize] = React.useState(0);
 
     const titleTag="トンネルMTU計算機";
     type classItem = {name: string, size: number, isChild?: boolean};
@@ -223,6 +224,23 @@ function MTUcalculator() {
                                 ))}
                             </Stack>
                         </Item>
+
+                        <Item>
+                            <Grid container>
+                                <Grid item xs={10}>
+                                    <TextField fullWidth size="small" label="任意のプロトコル(bytes)" value={customProtoSize} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <IconButton onClick={() => {
+                                        copySelectedProto.push({id: Math.random(), name: "任意のプロトコル", size: customProtoSize},);
+                                        setSelectedProto(copySelectedProto);
+                                    }}>
+                                        <Add />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        </Item>
+                        
                     </Grid>
                     <Grid item xs sm>
                         <Item>
