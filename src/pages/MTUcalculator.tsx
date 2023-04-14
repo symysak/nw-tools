@@ -181,6 +181,7 @@ function MTUcalculator() {
 
     const [textInput, setTextInput] = React.useState(1500);
     const [customProtoSize, setCustomProtoSize] = React.useState(0);
+    const [customProtoName, setCustomProtoName] = React.useState("任意のプロトコル");
 
     const titleTag="トンネルMTU計算機";
     type classItem = {name: string, size: number, isChild?: boolean};
@@ -227,13 +228,16 @@ function MTUcalculator() {
 
                         <Item>
                             <Grid container>
-                                <Grid item xs={10}>
-                                    <TextField fullWidth size="small" label="任意のプロトコル(bytes)" value={customProtoSize} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
+                                <Grid item xs={7}>
+                                    <TextField fullWidth size="small" label="プロトコル名" value={customProtoName} onChange={(event) => setCustomProtoName(event.target.value)}/>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <TextField fullWidth size="small" label="bytes" value={customProtoSize} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <IconButton onClick={() => {
                                         if(customProtoSize === 0) return;
-                                        copySelectedProto.push({id: Math.random(), name: "任意のプロトコル", size: customProtoSize},);
+                                        copySelectedProto.push({id: Math.random(), name: customProtoName, size: customProtoSize},);
                                         setSelectedProto(copySelectedProto);
                                     }}>
                                         <Add />
