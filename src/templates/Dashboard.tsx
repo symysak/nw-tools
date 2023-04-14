@@ -22,7 +22,8 @@ function FooterContents(props: any) {
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'© '} {new Date().getFullYear()} {' '} <Link color="inherit" href="/">SUYAMA</Link>{'.'}
       </Typography>
-      <Typography variant="body2" color="text.secondary" align="right">
+
+      <Typography paddingTop="20px" variant="body2" color="text.secondary" align="right">
         {"連絡先: info[at]suyama.ne.jp"}
         <br />
         <Link color="inherit" href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
