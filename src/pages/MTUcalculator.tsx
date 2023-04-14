@@ -232,6 +232,7 @@ function MTUcalculator() {
                                 </Grid>
                                 <Grid item xs={2}>
                                     <IconButton onClick={() => {
+                                        if(customProtoSize === 0) return;
                                         copySelectedProto.push({id: Math.random(), name: "任意のプロトコル", size: customProtoSize},);
                                         setSelectedProto(copySelectedProto);
                                     }}>
