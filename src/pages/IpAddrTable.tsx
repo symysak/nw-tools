@@ -14,176 +14,181 @@ import { Helmet } from "react-helmet-async";
 const copyToClipboard = async (text: string) => {
     await global.navigator.clipboard.writeText(text);
 };
+type Row = {
+    cidr: string;
+    subnetMask: string;
+    ipAddrCount: string;
+}
+type Rows = Row[];
 
-const rows = [
+const rows: Rows = [
     {
         cidr: "/32",
         subnetMask: "255.255.255.255",
         ipAddrCount: "1"
     },
     {
-        cider: "/31",
+        cidr: "/31",
         subnetMask: "255.255.255.254",
         ipAddrCount: "2"
     },
     {
-        cider: "/30",
+        cidr: "/30",
         subnetMask: "255.255.255.252",
         ipAddrCount: "4"
     },
     {
-        cider: "/29",
+        cidr: "/29",
         subnetMask: "255.255.255.248",
         ipAddrCount: "8"
     },
     {
-        cider: "/28",
+        cidr: "/28",
         subnetMask: "255.255.255.240",
         ipAddrCount: "16"
     },
     {
-        cider: "/27",
+        cidr: "/27",
         subnetMask: "255.255.255.224",
         ipAddrCount: "32"
     },
     {
-        cider: "/26",
+        cidr: "/26",
         subnetMask: "255.255.255.192",
         ipAddrCount: "64"
     },
     {
-        cider: "/25",
+        cidr: "/25",
         subnetMask: "255.255.255.128",
         ipAddrCount: "128"
     },
     {
-        cider: "/24",
+        cidr: "/24",
         subnetMask: "255.255.255.0",
         ipAddrCount: "256"
     },
     {
-        cider: "/23",
+        cidr: "/23",
         subnetMask: "255.255.254.0",
         ipAddrCount: "512"
     },
     {
-        cider: "/22",
+        cidr: "/22",
         subnetMask: "255.255.252.0",
         ipAddrCount: "1,024"
     },
     {
-        cider: "/21",
+        cidr: "/21",
         subnetMask: "255.255.248.0",
         ipAddrCount: "2,048"
     },
     {
-        cider: "/20",
+        cidr: "/20",
         subnetMask: "255.255.240.0",
         ipAddrCount: "4,096"
     },
     {
-        cider: "/19",
+        cidr: "/19",
         subnetMask: "255.255.224.0",
         ipAddrCount: "8,192"
     },
     {
-        cider: "/18",
+        cidr: "/18",
         subnetMask: "255.255.192.0",
         ipAddrCount: "16,384"
     },
     {
-        cider: "/17",
+        cidr: "/17",
         subnetMask: "255.255.128.0",
         ipAddrCount: "32,768"
     },
     {
-        cider: "/16",
+        cidr: "/16",
         subnetMask: "255.255.0.0",
         ipAddrCount: "65,536"
     },
     {
-        cider: "/15",
+        cidr: "/15",
         subnetMask: "255.254.0.0",
         ipAddrCount: "131,072"
     },
     {
-        cider: "/14",
+        cidr: "/14",
         subnetMask: "255.252.0.0",
         ipAddrCount: "262,144"
     },
     {
-        cider: "/13",
+        cidr: "/13",
         subnetMask: "255.248.0.0",
         ipAddrCount: "524,288"
     },
     {
-        cider: "/12",
+        cidr: "/12",
         subnetMask: "255.240.0.0",
         ipAddrCount: "1,048,576"
     },
     {
-        cider: "/11",
+        cidr: "/11",
         subnetMask: "255.224.0.0",
         ipAddrCount: "2,097,152"
     },
     {
-        cider: "/10",
+        cidr: "/10",
         subnetMask: "255.192.0.0",
         ipAddrCount: "4,194,304"
     },
     {
-        cider: "/9",
+        cidr: "/9",
         subnetMask: "255.128.0.0",
         ipAddrCount: "8,388,608"
     },
     {
-        cider: "/8",
+        cidr: "/8",
         subnetMask: "255.0.0.0",
         ipAddrCount: "16,777,216"
     },
     {
-        cider: "/7",
+        cidr: "/7",
         subnetMask: "254.0.0.0",
         ipAddrCount: "33,554,432"
     },
     {
-        cider: "/6",
+        cidr: "/6",
         subnetMask: "252.0.0.0",
         ipAddrCount: "67,108,864"
     },
     {
-        cider: "/5",
+        cidr: "/5",
         subnetMask: "248.0.0.0",
         ipAddrCount: "134,217,728"
     },
     {
-        cider: "/4",
+        cidr: "/4",
         subnetMask: "240.0.0.0",
         ipAddrCount: "268,435,456"
     },
     {
-        cider: "/3",
+        cidr: "/3",
         subnetMask: "224.0.0.0",
         ipAddrCount: "536,870,912"
     },
     {
-        cider: "/2",
+        cidr: "/2",
         subnetMask: "192.0.0.0",
         ipAddrCount: "1,073,741,824"
     },
     {
-        cider: "/1",
+        cidr: "/1",
         subnetMask: "128.0.0.0",
         ipAddrCount: "2,147,483,648"
     },
     {
-        cider: "/0",
+        cidr: "/0",
         subnetMask: "0.0.0.0",
         ipAddrCount: "4,294,967,296"
     }
 ];
 
-console.log(rows);
 function IpAddrTable(){
     const titleTag="IPアドレス個数表";
     return (
@@ -202,7 +207,7 @@ function IpAddrTable(){
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row: any) => (
+                            {rows.map((row: Row) => (
                                 <TableRow key={row.cidr} >
                                         <TableCell align="left">
                                             {row.cidr}
