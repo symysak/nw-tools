@@ -16,9 +16,14 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-
 function MTUcalculator() {
-    const proto = [
+    type Proto = {
+        name: string;
+        size: number;
+        isChild?: boolean;
+    }[];
+    
+    const proto: Proto = [
         { name: "Ethernet", size: 14},
         { name: "Ethernet - VLAN", size: 4, isChild: true},
         { name: "IPv4", size: 20},
@@ -31,10 +36,18 @@ function MTUcalculator() {
         { name: "GRE - Sequence Number", size: 4, isChild: true},
 
     ]
-    const [selectedProto, setSelectedProto] = React.useState([]);
-    let copySelectedProto: any = [...selectedProto];
 
-    const calculateSize = (type: "header size" | "mtu/mss", num: number, selectedProto: any) => {
+    type SelectedProto = {
+        id: number;
+        name: string;
+        size: number;
+        isChild?: boolean;
+    }[];
+
+    const [selectedProto, setSelectedProto] = React.useState<SelectedProto>([]);
+    let copySelectedProto: SelectedProto = [...selectedProto];
+
+    const calculateSize = (type: "header size" | "mtu/mss", num: number, selectedProto: SelectedProto) => {
         if(type === "header size"){
             let sum: number = 0;
             let str: string = "";
@@ -87,7 +100,7 @@ function MTUcalculator() {
     }
 
     // 配列のアイテムを上に移動
-    const upObject = (id: number, list: any) => {
+    const upObject = (id: number, list: SelectedProto) => {
         if(id === 0) return list;
 
         const temp1 = list[id]
@@ -98,7 +111,7 @@ function MTUcalculator() {
     }
 
     // 配列のアイテムを下に移動
-    const downObject = (id: number, list: any) => {
+    const downObject = (id: number, list: SelectedProto) => {
         if(id === list.length - 1) return list;
 
         const temp1 = list[id]
@@ -109,7 +122,10 @@ function MTUcalculator() {
     }
 
     // 選択されたプロトコルを表示するやつ
-    const SelectedProtoList = (props: any) => {
+    type SelectedProtoListProps = {
+        list: SelectedProto;
+    }
+    const SelectedProtoList = (props: SelectedProtoListProps) => {
         const list = props.list;
         let temp = [];
         for(let i = 0; i < list.length; i++) {
@@ -166,7 +182,7 @@ function MTUcalculator() {
     const [textInput, setTextInput] = React.useState(1500);
 
     const titleTag="トンネルMTU計算機";
-
+    type classItem = {name: string, size: number, isChild?: boolean};
     return (
         <div>
             <Helmet>
@@ -178,7 +194,7 @@ function MTUcalculator() {
                         <Item>
                             <Stack direction={"column"} spacing={1}>
                                 <p>ボタンを押して追加</p>
-                                {proto.map((item: any) => (
+                                {proto.map((item: classItem) => (
                                     <>
                                         {item.isChild === true
                                         ?<>

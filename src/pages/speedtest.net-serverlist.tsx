@@ -16,8 +16,21 @@ import SpeedIcon from '@mui/icons-material/Speed';
 
 
 const OoklaServerList = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<ServerList>([]);
     const [lastUpdated, setLastUpdated] = useState("");
+
+    type ServerInfo = {
+        id: number;
+        name: string;
+        location: string;
+        website: string;
+        host: string;
+        ipv4: string;
+        ipv6: string;
+        ipv4_asn: string;
+        ipv6_asn: string;
+    }
+    type ServerList = ServerInfo[];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -57,11 +70,11 @@ const OoklaServerList = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map((row: any) => (
+                            {data.map((row: ServerInfo) => (
                                 <TableRow key={row.id} >
                                         <TableCell align="right">
                                             {row.id}
-                                            <IconButton size="small" onClick={() => navigator.clipboard.writeText(row.id)}>
+                                            <IconButton size="small" onClick={() => navigator.clipboard.writeText(String(row.id))}>
                                                 <ContentCopyIcon fontSize="small" />
                                             </IconButton>
                                         </TableCell>
