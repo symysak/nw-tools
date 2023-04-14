@@ -20,15 +20,15 @@ const Item = styled(Paper)(({ theme }) => ({
 function MTUcalculator() {
     const proto = [
         { name: "Ethernet", size: 14},
-        { name: "Ethernet(Option) - VLAN", size: 4},
+        { name: "Ethernet - VLAN", size: 4, isChild: true},
         { name: "IPv4", size: 20},
         { name: "IPv6", size: 40},
         { name: "TCP", size: 20},
         { name: "UDP", size: 8},
         { name: "EtherIP(RFC3378)", size: 2},
         { name: "GRE", size: 4 },
-        { name: "GRE(Option) - Key", size: 4},
-        { name: "GRE(Option) - Sequence Number", size: 4},
+        { name: "GRE - Key", size: 4, isChild: true},
+        { name: "GRE - Sequence Number", size: 4, isChild: true},
 
     ]
     const [selectedProto, setSelectedProto] = React.useState([]);
@@ -85,6 +85,8 @@ function MTUcalculator() {
             return str;
         }
     }
+
+    // 配列のアイテムを上に移動
     const upObject = (id: number, list: any) => {
         if(id === 0) return list;
 
@@ -94,6 +96,8 @@ function MTUcalculator() {
         list[id - 1] = temp1
         return list
     }
+
+    // 配列のアイテムを下に移動
     const downObject = (id: number, list: any) => {
         if(id === list.length - 1) return list;
 
@@ -103,6 +107,8 @@ function MTUcalculator() {
         list[id + 1] = temp1
         return list
     }
+
+    // 選択されたプロトコルを表示するやつ
     const SelectedProtoList = (props: any) => {
         const list = props.list;
         let temp = [];
@@ -173,12 +179,31 @@ function MTUcalculator() {
                             <Stack direction={"column"} spacing={1}>
                                 <p>ボタンを押して追加</p>
                                 {proto.map((item: any) => (
-                                    <Button variant="contained" onClick={() => {
-                                        copySelectedProto.push({id: Math.random(), name: item.name, size: item.size},);
-                                        setSelectedProto(copySelectedProto);
-                                        }}>
-                                        {item.name} - {item.size}bytes
-                                    </Button>
+                                    <>
+                                        {item.isChild === true
+                                        ?<>
+                                         <Grid container>
+                                            <Grid item xs={1}>
+                                                {/* 入れ子的な表示をするためにココは開けておく */}
+                                            </Grid>
+                                            <Grid item xs={11}>
+                                                <Button fullWidth variant="contained" onClick={() => {
+                                                    copySelectedProto.push({id: Math.random(), name: item.name, size: item.size},);
+                                                    setSelectedProto(copySelectedProto);
+                                                    }}>
+                                                    {item.name} - {item.size}bytes
+                                                </Button>
+                                            </Grid>
+                                         </Grid>
+                                         </>
+                                        :<Button variant="contained" onClick={() => {
+                                            copySelectedProto.push({id: Math.random(), name: item.name, size: item.size},);
+                                            setSelectedProto(copySelectedProto);
+                                            }}>
+                                            {item.name} - {item.size}bytes
+                                         </Button>
+                                        }
+                                    </>
                                 ))}
                             </Stack>
                         </Item>
