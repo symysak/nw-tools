@@ -191,6 +191,9 @@ function MTUcalculator() {
                 <title>{titleTag + " - Network Tools | SUYAMA"}</title>
             </Helmet>
             <Dashboard title={titleTag} >
+                <Typography variant="body2" paddingBottom="10px">
+                    トンネリングの際のオーバーヘッド計算等にお使いください。
+                </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
                         <Item>
