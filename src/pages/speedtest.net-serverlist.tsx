@@ -52,6 +52,7 @@ const OoklaServerList = () => {
             <Dashboard title={titleTag} maxWidth={"xl"}>
                 <p>speedtest.netのサーバリストです。
                     speedtest-cliのサーバID指定の際にお使い下さい</p>
+                <p>スピードテストのご利用は計画的に。</p>
                 <TableContainer component={Paper} sx={{overflow: "auto"}}>
                     <a>最終更新: {lastUpdated}. 1時間毎に更新</a>
                     <Table size="small" aria-label="a dense table">
