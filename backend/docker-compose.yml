@@ -2,7 +2,7 @@ version: '3'
 services:
   nw-tools-backend:
     image: nw-tools-backend
-    container_name: nw-tools-backend
+    container_name: symysak/nw-tools-backend:main
     restart: always
     ports:
      - 3001:3001
