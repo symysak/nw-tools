@@ -1,17 +1,17 @@
 # ビルドする
 FROM node:20 as builder
 WORKDIR /app
-COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
+COPY ./backend/package.json ./package.json
+COPY ./backend/package-lock.json ./package-lock.json
 RUN npm ci
-COPY . .
+COPY .backend/ .
 RUN npm run build
 
 # 依存パッケージのインストールを行う
 FROM node:20 as deps
 WORKDIR /app
-COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
+COPY ./backend/package.json ./package.json
+COPY ./backend/package-lock.json ./package-lock.json
 RUN npm ci --only=production
 
 # 本番環境
