@@ -1,6 +1,8 @@
 import express from 'express';
 import router from './routes/index';
+import { updateServerlist } from './updateServerlist';
 const cors = require('cors');
+const cron = require('node-cron');
 
 const app = express();
 const corsOptions = {
@@ -18,3 +20,8 @@ const port = process.env.PORT || 3001;
 app.use('/api', router);
 
 app.listen(port);
+
+// node-cronでサーバリストの更新を実行
+cron.schedule('0 1 * * * *', () => {
+    updateServerlist();
+});

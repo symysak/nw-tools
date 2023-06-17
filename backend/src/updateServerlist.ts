@@ -60,7 +60,7 @@ const getIp = async (host: string, ver: number) => {
     }
 }
 
-async function main() { 
+export async function updateServerlist() { 
     let json = await getData();
     let list = [];
     for (let i = 0; i < json.length + 1; i++){
@@ -90,5 +90,3 @@ async function main() {
     }
     fs.writeFileSync("./cache.json", JSON.stringify(list));
 }
-
-main();
