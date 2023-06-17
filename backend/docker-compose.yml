@@ -7,6 +7,6 @@ services:
     ports:
      - 3001:3001
     environment:
-     - IPINFOIO_API_URL="https://ipinfo.io/"
-     - IPINFOIO_API_TOKEN="" # your token
+     - IPINFOIO_API_URL=https://ipinfo.io/
+     - IPINFOIO_API_TOKEN=your-token
     
