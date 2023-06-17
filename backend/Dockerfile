@@ -4,7 +4,7 @@ WORKDIR /app
 COPY ./backend/package.json ./package.json
 COPY ./backend/package-lock.json ./package-lock.json
 RUN npm ci
-COPY .backend/ .
+COPY ./backend .
 RUN npm run build
 
 # 依存パッケージのインストールを行う
