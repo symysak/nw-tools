@@ -5,8 +5,8 @@ services:
     container_name: nw-tools-backend
     restart: always
     ports:
-      - 3001:3001
+     - 3001:3001
     environment:
-      - IPINFOIO_URL: https://ipinfo.io/
-      - IPINFOIO_TOKEN: # your token
+     - IPINFOIO_URL="https://ipinfo.io/"
+     - IPINFOIO_TOKEN="" # your token
     
