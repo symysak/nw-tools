@@ -21,6 +21,8 @@ app.use('/api', router);
 
 app.listen(port);
 
+// 実行時に一度だけサーバリストの更新を実行
+updateServerlist();
 // node-cronでサーバリストの更新を実行
 cron.schedule('0 1 * * * *', () => {
     updateServerlist();
