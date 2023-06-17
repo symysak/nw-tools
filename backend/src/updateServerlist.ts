@@ -30,7 +30,7 @@ const getData = async () => {
 }
 
 const ipInfo = async (ip: string) => {
-    const url = process.env.IPINFO_IO_API_URL + ip + "?token=" + process.env.IPINFO_IO_API_TOKEN;
+    const url = process.env.IPINFOIO_API_URL + ip + "?token=" + process.env.IPINFOIO_API_TOKEN;
     if(ip !== "error"){
         try {
             const response = await axios.get(url);
