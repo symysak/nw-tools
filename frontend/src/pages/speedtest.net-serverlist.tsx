@@ -34,7 +34,7 @@ const OoklaServerList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios("https://nw-tools-backend.suyama.ne.jp/api/serverlist");
+            const res = await axios("https://nw-tools-backend.suyama.ne.jp/api/serverlist" + "?nocache=" + new Date().getTime());
             setLastUpdated(res.data.pop().lastupdated);
             setData(res.data);
         }
