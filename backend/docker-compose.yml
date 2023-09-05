@@ -2,10 +2,18 @@ version: '3'
 services:
   nw-tools-backend:
     image: symysak/nw-tools-backend:main
-    restart: always
+    restart: unless-stopped
     ports:
      - 3001:3001
     environment:
      - IPINFOIO_API_URL=https://ipinfo.io/
      - IPINFOIO_API_TOKEN=your-token
-    
+    labels:
+     - "com.centurylinklabs.watchtower.enable=true"
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 60 --label-enable
