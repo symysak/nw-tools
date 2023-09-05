@@ -24,6 +24,7 @@
     "recharts": "^2.8.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
+    "vite-plugin-rewrite-all": "^1.0.1",
     "web-vitals": "^3.4.0"
   },
   "scripts": {
