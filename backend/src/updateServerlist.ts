@@ -69,15 +69,15 @@ export async function updateServerlist() {
                 continue;
             }
             //const fqdnWithoutPort = json[i].host.replace(".prod.hosts.ooklaserver.net:8080", "")
-            const fqdnWithoutPort = json[i].url.replace("http:\/\/", "").replace("https:\/\/", "").replace(":8080\/speedtest\/upload.php", "");
-            const ipv4 = await ipInfo(await getIp(fqdnWithoutPort, 4));
-            const ipv6 = await ipInfo(await getIp(fqdnWithoutPort, 6));
+            const fqdn = json[i].url.replace("http:\/\/", "").replace("https:\/\/", "").replace(":8080\/speedtest\/upload.php", "");
+            const ipv4 = await ipInfo(await getIp(fqdn, 4));
+            const ipv6 = await ipInfo(await getIp(fqdn, 6));
             let push = {
                 id: json[i].id,
                 name: json[i].sponsor, //server name
                 location: json[i].name, //location
                 website: await getUrl("https://www.speedtest.net/api/js/perform-redirect?server_id=" + json[i].id),
-                host: json[i].host.replace(".prod.hosts.ooklaserver.net", ""), //url
+                host: fqdn + ":8080", //url
                 ipv4: ipv4.ip + "(" + ipv4.hostname + ")",
                 ipv6: ipv6.ip + "(" + ipv6.hostname + ")",
                 ipv4_asn: ipv4.org,
