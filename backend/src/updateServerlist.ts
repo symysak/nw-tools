@@ -68,9 +68,10 @@ export async function updateServerlist() {
             if(json[i].country !== "Japan"){
                 continue;
             }
-            const fqdnWithoutPort = json[i].host.replace(":8080", "")
-            const ipv4 = await ipInfo(await getIp(fqdnWithoutPort.replace(".prod.hosts.ooklaserver.net", ""), 4));
-            const ipv6 = await ipInfo(await getIp(fqdnWithoutPort.replace(".prod.hosts.ooklaserver.net", ""), 6));
+            //const fqdnWithoutPort = json[i].host.replace(".prod.hosts.ooklaserver.net:8080", "")
+            const fqdnWithoutPort = json[i].host.replace("http:\/\/", "").replace(":8080\/speedtest\/upload.php", "");
+            const ipv4 = await ipInfo(await getIp(fqdnWithoutPort, 4));
+            const ipv6 = await ipInfo(await getIp(fqdnWithoutPort, 6));
             let push = {
                 id: json[i].id,
                 name: json[i].sponsor, //server name
