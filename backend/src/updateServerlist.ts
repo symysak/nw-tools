@@ -69,7 +69,7 @@ export async function updateServerlist() {
                 continue;
             }
             //const fqdnWithoutPort = json[i].host.replace(".prod.hosts.ooklaserver.net:8080", "")
-            const fqdnWithoutPort = json[i].url.replace("http:\/\/", "").replace(":8080\/speedtest\/upload.php", "");
+            const fqdnWithoutPort = json[i].url.replace("http:\/\/", "").replace("https:\/\/", "").replace(":8080\/speedtest\/upload.php", "");
             const ipv4 = await ipInfo(await getIp(fqdnWithoutPort, 4));
             const ipv6 = await ipInfo(await getIp(fqdnWithoutPort, 6));
             let push = {
