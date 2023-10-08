@@ -34,7 +34,8 @@ function MTUcalculator() {
         { name: "GRE", size: 4 },
         { name: "GRE - Key", size: 4, isChild: true},
         { name: "GRE - Sequence Number", size: 4, isChild: true},
-
+        { name: "WireGuard(without UDP hdr)", size: 32},
+        { name: "VXLAN(without UDP hdr)", size: 8},
     ]
 
     type SelectedProto = {
