@@ -27,6 +27,8 @@ function FooterContents(props: any) {
         {"連絡先: info[at]suyama.ne.jp"}
         <br />
         <Link color="inherit" href="https://github.com/symysak/nw-tools">https://github.com/symysak/nw-tools</Link>
+        <br />
+        Ver. {__COMMIT_HASH__}
       </Typography>
     </div>
   );
