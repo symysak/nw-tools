@@ -99,14 +99,14 @@ const OoklaServerList = () => {
                                             {row.ipv6}
                                         </TableCell>
                                         <TableCell align="left">
-                                            {row.ipv4_asn === "無し"
-                                                ? "無し"
+                                            {row.ipv4_asn === "無し" || row.ipv4_asn === "API-error"
+                                                ? row.ipv4_asn
                                                 : <Link href={"https://bgp.he.net/" + row.ipv4_asn.split(" ", 1)[0]}>{row.ipv4_asn}</Link>
                                             }
                                         </TableCell>
                                         <TableCell align="left">
-                                            {row.ipv6_asn === "無し"
-                                                ? "無し"
+                                            {row.ipv6_asn === "無し" || row.ipv6_asn === "API-error"
+                                                ? row.ipv6_asn
                                                 : <Link href={"https://bgp.he.net/" + row.ipv6_asn.split(" ", 1)[0]}>{row.ipv6_asn}</Link>
                                             }
                                         </TableCell>
