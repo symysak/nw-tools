@@ -138,7 +138,7 @@ function MTUcalculator() {
                                 {list[i].name} - {list[i].size}bytes
                             </Button>
                         </Grid>
-                        <Grid justifySelf="center" item xs={4} sm={3} md={2}>
+                        <Grid alignSelf="center" justifySelf="center" item xs={4} sm={3} md={2}>
 
                             {i === 0
                             ? <IconButton disabled size="small">
