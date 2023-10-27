@@ -206,7 +206,7 @@ function MTUcalculator() {
                                         ?<>
                                          <Grid container>
                                             <Grid item xs={1}>
-                                                <SubdirectoryArrowRight sx={{height: "100%"}}/>
+                                                <SubdirectoryArrowRight sx={{height: "85%"}}/>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Button fullWidth variant="contained" onClick={() => {
