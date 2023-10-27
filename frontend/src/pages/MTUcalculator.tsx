@@ -1,11 +1,11 @@
-import { Button, Grid, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
+import { Button, Grid, Icon, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Dashboard from "../templates/Dashboard";
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Helmet } from "react-helmet-async";
-import { Add, ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import { Add, ArrowDownward, ArrowUpward, SubdirectoryArrowRight, SubtitlesOff } from "@mui/icons-material";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -25,15 +25,15 @@ function MTUcalculator() {
     
     const proto: Proto = [
         { name: "Ethernet", size: 14},
-        { name: "Ethernet - VLAN", size: 4, isChild: true},
+        { name: "VLAN", size: 4, isChild: true},
         { name: "IPv4", size: 20},
         { name: "IPv6", size: 40},
         { name: "TCP", size: 20},
         { name: "UDP", size: 8},
         { name: "EtherIP(RFC3378)", size: 2},
         { name: "GRE", size: 4 },
-        { name: "GRE - Key", size: 4, isChild: true},
-        { name: "GRE - Sequence Number", size: 4, isChild: true},
+        { name: "Key", size: 4, isChild: true},
+        { name: "Sequence Number", size: 4, isChild: true},
         { name: "WireGuard(without UDP hdr)", size: 32},
         { name: "VXLAN(without UDP hdr)", size: 8},
     ]
@@ -206,7 +206,7 @@ function MTUcalculator() {
                                         ?<>
                                          <Grid container>
                                             <Grid item xs={1}>
-                                                {/* 入れ子的な表示をするためにココは開けておく */}
+                                                <SubdirectoryArrowRight sx={{height: "100%"}}/>
                                             </Grid>
                                             <Grid item xs={11}>
                                                 <Button fullWidth variant="contained" onClick={() => {
