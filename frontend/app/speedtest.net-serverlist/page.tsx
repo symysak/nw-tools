@@ -9,12 +9,13 @@ import { useEffect } from "react";
 import SpeedIcon from '@mui/icons-material/Speed';
 import Link from '@mui/material/Link';
 import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/react";
-
+import {Skeleton} from "@nextui-org/react";
 
 
 const OoklaServerList = () => {
     const [data, setData] = useState<ServerList>([]);
     const [lastUpdated, setLastUpdated] = useState("");
+    const [loaded, setLoaded] = useState(false);
 
     type ServerInfo = {
         id: number;
@@ -36,6 +37,7 @@ const OoklaServerList = () => {
             setData(res.data);
         }
         fetchData();
+        setLoaded(true);
         /*
         setData([
             {
@@ -71,6 +73,7 @@ const OoklaServerList = () => {
                 <p>speedtest.netのサーバリストです。
                     speedtest-cliのサーバID指定の際にお使い下さい</p>
                 <p>スピードテストのご利用は計画的に。</p>
+                <Skeleton isLoaded={loaded}>
                 <Table 
                     isCompact
                     topContent={<a>server_count: {data.length}</a>}
@@ -89,6 +92,7 @@ const OoklaServerList = () => {
                         <TableColumn style={{minWidth:"250px"}}>IPv6 ASN</TableColumn>
                     </TableHeader>
                     <TableBody items={data}>
+                        
                         {(item: ServerInfo) => (
                             <TableRow key={item.id} >
                                     <TableCell align="right">
@@ -134,8 +138,10 @@ const OoklaServerList = () => {
                                     </TableCell>
                             </TableRow>
                         )}
+                        
                     </TableBody>
                 </Table>
+                </Skeleton>
         </div>
     )
 }
