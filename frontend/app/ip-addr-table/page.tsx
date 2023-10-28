@@ -194,32 +194,30 @@ const rows: Rows = [
 export default function IpAddrTable(){
     const titleTag="IPアドレス個数表";
     return (
-        <Table isStriped>
+        <Table>
             <TableHeader>
-                <TableRow>
-                    <TableColumn style={{minWidth:"85px"}}>CIDR</TableColumn>
-                    <TableColumn style={{minWidth:"170px"}}>サブネットマスク</TableColumn>
-                    <TableColumn style={{minWidth:"154px"}}>IPアドレス数</TableColumn>
-                </TableRow>
+                <TableColumn style={{minWidth:"85px"}}>CIDR</TableColumn>
+                <TableColumn style={{minWidth:"170px"}}>サブネットマスク</TableColumn>
+                <TableColumn style={{minWidth:"154px"}}>IPアドレス数</TableColumn>
             </TableHeader>
-            <TableBody>
-                {(row: Row) => (
-                    <TableRow key={row.cidr}>
+            <TableBody items={rows}>
+                {(item: Row) => (
+                    <TableRow key={item.cidr}>
                             <TableCell align="left">
-                                {row.cidr}
-                                <IconButton size="small" onClick={() => copyToClipboard(row.cidr)} >
+                                {item.cidr}
+                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.cidr)} >
                                     <ContentCopyIcon fontSize="small"/>
                                 </IconButton>
                             </TableCell>
                             <TableCell align="left">
-                                {row.subnetMask}
-                                <IconButton size="small" onClick={() => copyToClipboard(row.subnetMask)} >
+                                {item.subnetMask}
+                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.subnetMask)} >
                                     <ContentCopyIcon fontSize="small"/>
                                 </IconButton>
                             </TableCell>
                             <TableCell align="left">
-                                {row.ipAddrCount}
-                                <IconButton size="small" onClick={() => copyToClipboard(row.ipAddrCount)} >
+                                {item.ipAddrCount}
+                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.ipAddrCount)} >
                                     <ContentCopyIcon fontSize="small"/>
                                 </IconButton>
                             </TableCell>
@@ -228,5 +226,5 @@ export default function IpAddrTable(){
                 )}
             </TableBody>
         </Table>
-    )
+    );
 }
