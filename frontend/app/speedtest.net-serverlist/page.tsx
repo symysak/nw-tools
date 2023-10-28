@@ -37,7 +37,7 @@ const OoklaServerList = () => {
             setData(res.data);
         }
         fetchData();
-        setTimeout(() => setLoaded(true), 200);
+        setTimeout(() => setLoaded(true), 500);
         /*
         setData([
             {
