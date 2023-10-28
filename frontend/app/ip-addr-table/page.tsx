@@ -1,25 +1,27 @@
-import Dashboard from "../templates/Dashboard";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+"use client";
+
+import React from "react";
+import {
+    Table,
+    TableHeader,
+    TableBody,
+    TableColumn,
+    TableRow,
+    TableCell
+  } from "@nextui-org/react";
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { Helmet } from "react-helmet-async";
 
 // クリップボードにコピー用
 const copyToClipboard = async (text: string) => {
     await global.navigator.clipboard.writeText(text);
 };
-type Row = {
+interface Row {
     cidr: string;
     subnetMask: string;
     ipAddrCount: string;
 }
-type Rows = Row[];
+interface Rows extends Array<Row> {}
 
 const rows: Rows = [
     {
@@ -189,52 +191,42 @@ const rows: Rows = [
     }
 ];
 
-function IpAddrTable(){
+export default function IpAddrTable(){
     const titleTag="IPアドレス個数表";
     return (
-        <div>
-            <Helmet>
-                <title>{titleTag + " - Network Tools | SUYAMA"}</title>
-            </Helmet>
-            <Dashboard title={titleTag} >
-                <TableContainer component={Paper} sx={{overflow: "auto"}}>
-                    <Table size="small" aria-label="a dense table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell style={{minWidth:"85px"}}>CIDR</TableCell>
-                                <TableCell style={{minWidth:"170px"}}>サブネットマスク</TableCell>
-                                <TableCell style={{minWidth:"154px"}}>IPアドレス数</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row: Row) => (
-                                <TableRow key={row.cidr} >
-                                        <TableCell align="left">
-                                            {row.cidr}
-                                            <IconButton size="small" onClick={() => copyToClipboard(row.cidr)} >
-                                                <ContentCopyIcon fontSize="small"/>
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {row.subnetMask}
-                                            <IconButton size="small" onClick={() => copyToClipboard(row.subnetMask)} >
-                                                <ContentCopyIcon fontSize="small"/>
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {row.ipAddrCount}
-                                            <IconButton size="small" onClick={() => copyToClipboard(row.ipAddrCount)} >
-                                                <ContentCopyIcon fontSize="small"/>
-                                            </IconButton>
-                                        </TableCell>
+        <Table isStriped>
+            <TableHeader>
+                <TableRow>
+                    <TableColumn style={{minWidth:"85px"}}>CIDR</TableColumn>
+                    <TableColumn style={{minWidth:"170px"}}>サブネットマスク</TableColumn>
+                    <TableColumn style={{minWidth:"154px"}}>IPアドレス数</TableColumn>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {(row: Row) => (
+                    <TableRow key={row.cidr}>
+                            <TableCell align="left">
+                                {row.cidr}
+                                <IconButton size="small" onClick={() => copyToClipboard(row.cidr)} >
+                                    <ContentCopyIcon fontSize="small"/>
+                                </IconButton>
+                            </TableCell>
+                            <TableCell align="left">
+                                {row.subnetMask}
+                                <IconButton size="small" onClick={() => copyToClipboard(row.subnetMask)} >
+                                    <ContentCopyIcon fontSize="small"/>
+                                </IconButton>
+                            </TableCell>
+                            <TableCell align="left">
+                                {row.ipAddrCount}
+                                <IconButton size="small" onClick={() => copyToClipboard(row.ipAddrCount)} >
+                                    <ContentCopyIcon fontSize="small"/>
+                                </IconButton>
+                            </TableCell>
 
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Dashboard>
-        </div>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>
     )
 }
-export default IpAddrTable;

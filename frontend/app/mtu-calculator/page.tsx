@@ -1,11 +1,19 @@
-import { Button, Grid, Icon, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
+"use client";
+
+import React from "react";
+import { Grid, Icon, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Dashboard from "../templates/Dashboard";
-import TextField from '@mui/material/TextField';
-import * as React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Helmet } from "react-helmet-async";
 import { Add, ArrowDownward, ArrowUpward, SubdirectoryArrowRight, SubtitlesOff } from "@mui/icons-material";
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/react";
+import {
+    Listbox,
+    ListboxSection,
+    ListboxItem
+} from "@nextui-org/react";
+import {Textarea} from "@nextui-org/react";
+import {Button, ButtonGroup} from "@nextui-org/react";
+import {Spacer} from "@nextui-org/react";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -36,7 +44,7 @@ function MTUcalculator() {
         { name: "Sequence Number", size: 4, isChild: true},
         { name: "WireGuard(without UDP hdr)", size: 32},
         { name: "VXLAN(without UDP hdr)", size: 8},
-    ]
+    ];
 
     type SelectedProto = {
         id: number;
@@ -128,23 +136,24 @@ function MTUcalculator() {
     }
     const SelectedProtoList = (props: SelectedProtoListProps) => {
         const list = props.list;
-        let temp = [];
+        let temp: any = [];
         for(let i = 0; i < list.length; i++) {
             temp.push(
-                <div>
+                <div key={i}>
+                    <Spacer y={2}/>
                     <Grid container>
                         <Grid item xs={8} sm={9} md={10}>
-                            <Button variant="contained" fullWidth>
+                            <Button fullWidth disableAnimation>
                                 {list[i].name} - {list[i].size}bytes
                             </Button>
                         </Grid>
                         <Grid alignSelf="center" justifySelf="center" item xs={4} sm={3} md={2}>
 
                             {i === 0
-                            ? <IconButton disabled size="small">
+                            ? <IconButton color="inherit" disabled size="small">
                                 <ArrowUpward fontSize="small"/>
                               </IconButton>
-                            : <IconButton size="small">
+                            : <IconButton color="inherit" size="small">
                                 <ArrowUpward fontSize="small" onClick={() => {
                                     setSelectedProto(upObject(i, copySelectedProto));
                                 }}/>
@@ -152,17 +161,17 @@ function MTUcalculator() {
                             }
 
                             {i === (list.length - 1)
-                            ? <IconButton disabled size="small">
+                            ? <IconButton color="inherit" disabled size="small">
                                 <ArrowDownward fontSize="small"/>
                               </IconButton>
-                            : <IconButton size="small">
+                            : <IconButton color="inherit" size="small">
                                 <ArrowDownward fontSize="small" onClick={() => {
                                     setSelectedProto(downObject(i, copySelectedProto));
                                 }}/>
                               </IconButton>
                             }
 
-                            <IconButton size="small">
+                            <IconButton color="inherit" size="small">
                                 <DeleteIcon fontSize="small" onClick={() => {
                                     setSelectedProto(copySelectedProto.filter((a: any) =>  a.id !== list[i].id));
                                 }}/>
@@ -174,9 +183,9 @@ function MTUcalculator() {
             )
         }
         return (
-            <Stack direction={"column"} spacing={1}>
+            <div>
                 {temp}
-            </Stack>
+            </div>
         )
     }
 
@@ -188,80 +197,82 @@ function MTUcalculator() {
     type classItem = {name: string, size: number, isChild?: boolean};
     return (
         <div>
-            <Helmet>
-                <title>{titleTag + " - Network Tools | SUYAMA"}</title>
-            </Helmet>
-            <Dashboard title={titleTag} >
                 <Typography variant="body2" paddingBottom="10px">
                     トンネリングの際のオーバーヘッド計算等にお使いください。
                 </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={3}>
-                        <Item>
-                            <Stack direction={"column"} spacing={1}>
+                        <Card>
+                            <CardBody>
                                 <p>ボタンを押して追加</p>
-                                {proto.map((item: classItem) => (
-                                    <>
-                                        {item.isChild === true
-                                        ?<>
-                                         <Grid container>
-                                            <Grid item xs={1}>
-                                                <SubdirectoryArrowRight sx={{height: "85%"}}/>
-                                            </Grid>
-                                            <Grid item xs={11}>
-                                                <Button fullWidth variant="contained" onClick={() => {
-                                                    copySelectedProto.push({id: Math.random(), name: item.name, size: item.size},);
-                                                    setSelectedProto(copySelectedProto);
-                                                    }}>
-                                                    {item.name} - {item.size}bytes
-                                                </Button>
-                                            </Grid>
-                                         </Grid>
-                                         </>
-                                        :<Button variant="contained" onClick={() => {
+                                <Listbox
+                                    items={proto}
+                                >
+                                {(item: classItem) => (
+                                    <ListboxItem
+                                        key={item.name}
+                                        onPress={() => {
                                             copySelectedProto.push({id: Math.random(), name: item.name, size: item.size},);
                                             setSelectedProto(copySelectedProto);
-                                            }}>
+                                        }}
+                                    >
+                                        {item.isChild === true ? (
+                                            <Grid container>
+                                                <Grid item xs={1}>
+                                                    <SubdirectoryArrowRight fontSize="inherit"/>
+                                                </Grid>
+                                                <Grid item xs={11}>
+                                                    {item.name} - {item.size}bytes
+                                                </Grid>
+                                            </Grid>
+                                        ) : (
+                                            <>
                                             {item.name} - {item.size}bytes
-                                         </Button>
-                                        }
-                                    </>
-                                ))}
-                            </Stack>
-                        </Item>
+                                            </>
+                                        )}
+                                    </ListboxItem>
+                                )}
 
-                        <Item>
-                            <Grid container>
-                                <Grid item xs={7}>
-                                    <TextField fullWidth size="small" label="プロトコル名" value={customProtoName} onChange={(event) => setCustomProtoName(event.target.value)}/>
+                                </Listbox>
+                                <Grid container>
+                                    <Grid item xs={8}>
+                                        <Textarea minRows={1} fullWidth size="sm" value={customProtoName} onChange={(event) => setCustomProtoName(event.target.value)}/>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Textarea minRows={1} fullWidth size="sm" value={String(customProtoSize)} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
+                                    </Grid> 
+                                    <Grid item xs={1}>
+                                        <IconButton
+                                            style={{
+                                                height: "100%",
+                                            }}
+                                            color="inherit"
+                                            onClick={() => {
+                                                if(customProtoSize === 0) return;
+                                                copySelectedProto.push({id: Math.random(), name: customProtoName, size: customProtoSize},);
+                                                setSelectedProto(copySelectedProto);
+                                            }}
+                                        >
+                                            <Add />
+                                        </IconButton>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={3}>
-                                    <TextField fullWidth size="small" label="bytes" value={customProtoSize} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
-                                </Grid>
-                                <Grid item xs={2}>
-                                    <IconButton onClick={() => {
-                                        if(customProtoSize === 0) return;
-                                        copySelectedProto.push({id: Math.random(), name: customProtoName, size: customProtoSize},);
-                                        setSelectedProto(copySelectedProto);
-                                    }}>
-                                        <Add />
-                                    </IconButton>
-                                </Grid>
-                            </Grid>
-                        </Item>
-                        
+                            </CardBody>
+                        </Card>
                     </Grid>
                     <Grid item xs sm>
-                        <Item>
-                            <TextField label="元のMTU" value={textInput} onChange={(event) => setTextInput(Number(event.target.value))}/>
-                            <p>Header size: {calculateSize("header size", 0, selectedProto)}</p>
-                            <p>MTU/MSS: {calculateSize("mtu/mss", textInput, selectedProto)}</p>
-                            <p>追加したプロトコル</p>
-                                <SelectedProtoList list={selectedProto} />
-                        </Item>
+                        <Card>
+                            <CardBody>
+                                <Textarea labelPlacement="outside-left" maxRows={1} label="元のMTU" value={String(textInput)} onChange={(event) => setTextInput(Number(event.target.value))}/>
+                                <p>Header size: {calculateSize("header size", 0, selectedProto)}</p>
+                                <p>MTU/MSS: {calculateSize("mtu/mss", textInput, selectedProto)}</p>
+                                <p>追加したプロトコル</p>
+                                    <SelectedProtoList list={selectedProto} />
+                            </CardBody>
+                        </Card>
                     </Grid>
                 </Grid>
-            </Dashboard>
+
 
         </div>
     )
