@@ -1,14 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-    Table,
-    TableHeader,
-    TableBody,
-    TableColumn,
-    TableRow,
-    TableCell
-  } from "@nextui-org/react";
+import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -194,37 +187,39 @@ const rows: Rows = [
 export default function IpAddrTable(){
     const titleTag="IPアドレス個数表";
     return (
-        <Table>
-            <TableHeader>
-                <TableColumn style={{minWidth:"85px"}}>CIDR</TableColumn>
-                <TableColumn style={{minWidth:"170px"}}>サブネットマスク</TableColumn>
-                <TableColumn style={{minWidth:"154px"}}>IPアドレス数</TableColumn>
-            </TableHeader>
-            <TableBody items={rows}>
-                {(item: Row) => (
-                    <TableRow key={item.cidr}>
-                            <TableCell align="left">
-                                {item.cidr}
-                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.cidr)} >
-                                    <ContentCopyIcon fontSize="small"/>
-                                </IconButton>
-                            </TableCell>
-                            <TableCell align="left">
-                                {item.subnetMask}
-                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.subnetMask)} >
-                                    <ContentCopyIcon fontSize="small"/>
-                                </IconButton>
-                            </TableCell>
-                            <TableCell align="left">
-                                {item.ipAddrCount}
-                                <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.ipAddrCount)} >
-                                    <ContentCopyIcon fontSize="small"/>
-                                </IconButton>
-                            </TableCell>
+        <TableContainer>
+            <Table size="small">
+                <TableHead>
+                    <TableCell style={{minWidth:"85px"}}>CIDR</TableCell>
+                    <TableCell style={{minWidth:"170px"}}>サブネットマスク</TableCell>
+                    <TableCell style={{minWidth:"154px"}}>IPアドレス数</TableCell>
+                </TableHead>
+                <TableBody>
+                    {rows.map((item: Row) => (
+                        <TableRow key={item.cidr}>
+                                <TableCell align="left">
+                                    {item.cidr}
+                                    <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.cidr)} >
+                                        <ContentCopyIcon fontSize="small"/>
+                                    </IconButton>
+                                </TableCell>
+                                <TableCell align="left">
+                                    {item.subnetMask}
+                                    <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.subnetMask)} >
+                                        <ContentCopyIcon fontSize="small"/>
+                                    </IconButton>
+                                </TableCell>
+                                <TableCell align="left">
+                                    {item.ipAddrCount}
+                                    <IconButton color="inherit" size="small" onClick={() => copyToClipboard(item.ipAddrCount)} >
+                                        <ContentCopyIcon fontSize="small"/>
+                                    </IconButton>
+                                </TableCell>
 
-                    </TableRow>
-                )}
-            </TableBody>
-        </Table>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }

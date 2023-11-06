@@ -8,8 +8,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import SpeedIcon from '@mui/icons-material/Speed';
 import Link from '@mui/material/Link';
-import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/react";
-import {Skeleton} from "@nextui-org/react";
+import { Table, TableHead, TableBody, TableRow, TableCell, Paper, TableContainer } from '@mui/material';
+import {Skeleton} from "@mui/material";
 
 
 const OoklaServerList = () => {
@@ -66,80 +66,83 @@ const OoklaServerList = () => {
         */
     }, [])
 
-    const titleTag="speedtest.netサーバリスト";
 
     return (
         <div>
-                <p>speedtest.netのサーバリストです。
-                    speedtest-cliのサーバID指定の際にお使い下さい</p>
-                <p>スピードテストのご利用は計画的に。</p>
-                <Skeleton isLoaded={loaded}>
-                    <Table 
-                        isCompact
-                        topContent={<a>server_count: {data.length}</a>}
-                        bottomContent={<a>最終更新: {lastUpdated} (UTC). 1時間毎に更新</a>}
-                    >
-                        <TableHeader>
-                            <TableColumn style={{minWidth:"104px"}}>ID</TableColumn>
-                            <TableColumn style={{minWidth:"160px"}}>サーバ名</TableColumn>
-                            <TableColumn style={{minWidth:"117px"}}>ロケーション</TableColumn>
-                            <TableColumn style={{minWidth:"100px"}}>ウェブサイト</TableColumn>
-                            <TableColumn style={{maxWidth:"50px"}}>測定ボタン</TableColumn>
-                            <TableColumn style={{minWidth:"200px"}}>ホスト</TableColumn>
-                            <TableColumn style={{minWidth:"300px"}}>IPv4 Addr(RDNS)</TableColumn>
-                            <TableColumn style={{minWidth:"250px"}}>IPv6 Addr(RDNS)</TableColumn>
-                            <TableColumn style={{minWidth:"250px"}}>IPv4 ASN</TableColumn>
-                            <TableColumn style={{minWidth:"250px"}}>IPv6 ASN</TableColumn>
-                        </TableHeader>
-                        <TableBody items={data}>
-                            {(item: ServerInfo) => (
-                                <TableRow key={item.id} >
-                                        <TableCell align="right">
-                                            {item.id}
-                                            <IconButton color="inherit" size="small" onClick={() => navigator.clipboard.writeText(String(item.id))}>
-                                                <ContentCopyIcon fontSize="small" />
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.name}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.location}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Link href={item.website}>{item.website}</Link>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <IconButton color="inherit" size="small" href={"https://www.speedtest.net/server/" + item.id}>
-                                                <SpeedIcon fontSize="small" />
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.host}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.ipv4}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.ipv6}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.ipv4_asn === "無し" || item.ipv4_asn === "API-error"
-                                                ? item.ipv4_asn
-                                                : <Link href={"https://bgp.he.net/" + item.ipv4_asn.split(" ", 1)[0]}>{item.ipv4_asn}</Link>
-                                            }
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {item.ipv6_asn === "無し" || item.ipv6_asn === "API-error"
-                                                ? item.ipv6_asn
-                                                : <Link href={"https://bgp.he.net/" + item.ipv6_asn.split(" ", 1)[0]}>{item.ipv6_asn}</Link>
-                                            }
-                                        </TableCell>
+            <p>speedtest.netのサーバリストです。
+                speedtest-cliのサーバID指定の際にお使い下さい</p>
+            <p>スピードテストのご利用は計画的に。</p>
+            {loaded ? (
+                <TableContainer component={Paper}>
+                    <a>server_count: {data.length}</a>
+                    <Table size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell style={{ minWidth: "104px" }}>ID</TableCell>
+                                <TableCell style={{ minWidth: "160px" }}>サーバ名</TableCell>
+                                <TableCell style={{ minWidth: "117px" }}>ロケーション</TableCell>
+                                <TableCell style={{ minWidth: "100px" }}>ウェブサイト</TableCell>
+                                <TableCell style={{ maxWidth: "50px" }}>測定ボタン</TableCell>
+                                <TableCell style={{ minWidth: "200px" }}>ホスト</TableCell>
+                                <TableCell style={{ minWidth: "300px" }}>IPv4 Addr(RDNS)</TableCell>
+                                <TableCell style={{ minWidth: "250px" }}>IPv6 Addr(RDNS)</TableCell>
+                                <TableCell style={{ minWidth: "250px" }}>IPv4 ASN</TableCell>
+                                <TableCell style={{ minWidth: "250px" }}>IPv6 ASN</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {data.map((row: ServerInfo) => (
+                                <TableRow key={row.id} >
+                                    <TableCell align="right">
+                                        {row.id}
+                                        <IconButton size="small" onClick={() => navigator.clipboard.writeText(String(row.id))}>
+                                            <ContentCopyIcon fontSize="small" />
+                                        </IconButton>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.location}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        <Link href={row.website}>{row.website}</Link>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        <IconButton size="small" href={"https://www.speedtest.net/server/" + row.id}>
+                                            <SpeedIcon fontSize="small" />
+                                        </IconButton>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.host}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.ipv4}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.ipv6}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.ipv4_asn === "無し" || row.ipv4_asn === "API-error"
+                                            ? row.ipv4_asn
+                                            : <Link href={"https://bgp.he.net/" + row.ipv4_asn.split(" ", 1)[0]}>{row.ipv4_asn}</Link>
+                                        }
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {row.ipv6_asn === "無し" || row.ipv6_asn === "API-error"
+                                            ? row.ipv6_asn
+                                            : <Link href={"https://bgp.he.net/" + row.ipv6_asn.split(" ", 1)[0]}>{row.ipv6_asn}</Link>
+                                        }
+                                    </TableCell>
                                 </TableRow>
-                            )}
+                            ))}
                         </TableBody>
                     </Table>
-                </Skeleton>
+                    <a>最終更新: {lastUpdated} (UTC). 1時間毎に更新</a>
+                </TableContainer>
+            ) : (<Skeleton variant="rectangular" width="100%" height="100%" />
+            )
+            }
         </div>
     )
 }
