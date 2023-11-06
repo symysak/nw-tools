@@ -95,15 +95,14 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 MuiTableContainer: {
                     defaultProps: {
                         sx: {
-                            backgroundColor: "primary.main",
                             borderRadius: "14px",
+                            boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, .02), 0px 2px 10px 0px rgba(0, 0, 0, .06), 0px 0px 1px 0px rgba(0, 0, 0, .3)",
                         },
                     },
                 },
                 MuiTableHead: {
                     defaultProps: {
                         sx: {
-                            backgroundColor: "secondary.main",
                         },
                     }
                 }

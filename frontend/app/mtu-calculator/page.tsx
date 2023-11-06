@@ -7,12 +7,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Add, ArrowDownward, ArrowUpward, SubdirectoryArrowRight, SubtitlesOff } from "@mui/icons-material";
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+    borderRadius: "14px",
+    boxShadow: "0px 0px 5px 0px rgba(0,0,0,.02),0px 2px 10px 0px rgba(0,0,0,.06),0px 0px 1px 0px rgba(0,0,0,.3)",
+    color: theme.palette.text.primary,
+}));
 
 
 function MTUcalculator() {
@@ -222,9 +222,7 @@ function MTUcalculator() {
                                 </>
                             ))}
                         </Stack>
-                    </Item>
-                    <Item>
-                        <Grid container>
+                        <Grid container paddingTop="15px">
                             <Grid item xs={7}>
                                 <TextField fullWidth size="small" label="プロトコル名" value={customProtoName} onChange={(event) => setCustomProtoName(event.target.value)} />
                             </Grid>

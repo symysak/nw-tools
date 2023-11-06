@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer } from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -187,7 +187,7 @@ const rows: Rows = [
 export default function IpAddrTable(){
     const titleTag="IPアドレス個数表";
     return (
-        <TableContainer>
+        <TableContainer component={Paper}>
             <Table size="small">
                 <TableHead>
                     <TableCell style={{minWidth:"85px"}}>CIDR</TableCell>
