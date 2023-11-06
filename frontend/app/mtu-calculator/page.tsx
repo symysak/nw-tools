@@ -11,7 +11,7 @@ import {
     ListboxSection,
     ListboxItem
 } from "@nextui-org/react";
-import {Textarea} from "@nextui-org/react";
+import {Input} from "@nextui-org/react";
 import {Button, ButtonGroup} from "@nextui-org/react";
 import {Spacer} from "@nextui-org/react";
 
@@ -236,10 +236,20 @@ function MTUcalculator() {
                                 </Listbox>
                                 <Grid container>
                                     <Grid item xs={8}>
-                                        <Textarea minRows={1} fullWidth size="sm" value={customProtoName} onChange={(event) => setCustomProtoName(event.target.value)}/>
+                                        <Input
+                                            value={customProtoName}
+                                            onValueChange={setCustomProtoName}
+                                            label="プロトコル名"
+                                        />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Textarea minRows={1} fullWidth size="sm" value={String(customProtoSize)} onChange={(event) => setCustomProtoSize(Number(event.target.value))}/>
+                                        <Input
+                                            value={String(customProtoSize)}
+                                            label="bytes"
+                                            onChange={
+                                                (event) => setCustomProtoSize(Number(event.target.value))
+                                            }
+                                            />
                                     </Grid> 
                                     <Grid item xs={1}>
                                         <IconButton
@@ -263,7 +273,7 @@ function MTUcalculator() {
                     <Grid item xs sm>
                         <Card>
                             <CardBody>
-                                <Textarea labelPlacement="outside-left" maxRows={1} label="元のMTU" value={String(textInput)} onChange={(event) => setTextInput(Number(event.target.value))}/>
+                                <Input labelPlacement="outside-left" label="元のMTU" value={String(textInput)} onChange={(event) => setTextInput(Number(event.target.value))}/>
                                 <p>Header size: {calculateSize("header size", 0, selectedProto)}</p>
                                 <p>MTU/MSS: {calculateSize("mtu/mss", textInput, selectedProto)}</p>
                                 <p>追加したプロトコル</p>

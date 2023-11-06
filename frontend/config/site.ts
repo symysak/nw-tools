@@ -20,6 +20,10 @@ export const siteConfig = {
 			label: "speedtest.netサーバリスト",
 			href: "/speedtest.net-serverlist",
 		},
+		{
+			label: "NAT64アドレス計算機",
+			href: "/nat64-calculator",
+		},
 	],
 	navMenuItems: [
 		{
@@ -35,8 +39,8 @@ export const siteConfig = {
 			href: "/speedtest.net-serverlist",
 		},
 		{
-			label: "Logout",
-			href: "/logout",
+			label: "NAT64アドレス計算機",
+			href: "/nat64-calculator",
 		},
 	],
 	links: {
