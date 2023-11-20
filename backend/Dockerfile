@@ -3,7 +3,7 @@ FROM node:20 as builder
 WORKDIR /app
 COPY ./backend/package.json ./package.json
 COPY ./backend/package-lock.json ./package-lock.json
-RUN npm install --omit=dev
+RUN npm install
 COPY ./backend .
 RUN npm run build
 
