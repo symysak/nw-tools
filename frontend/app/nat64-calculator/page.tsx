@@ -1,8 +1,7 @@
 "use client";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
-import { Spacer } from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Card, CardHeader, CardContent, TextField } from "@mui/material";
+import { IconButton } from "@mui/material";
+import Button from '@mui/material/Button';
 import { useState } from "react";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -34,96 +33,76 @@ const nat64Calculator = () => {
     return (
         <div>
             <p>NAT64のアドレスの変換ができます。</p>
-            <Spacer y={4} />
-            <Card>
+            <Card elevation={3}>
                 <CardHeader>IPv4アドレスからIPv6アドレス</CardHeader>
-                <CardBody className="place-items-center">
-                    <Input
+                <CardContent className="place-items-center">
+                    <TextField
                         fullWidth
-                        isClearable
-                        labelPlacement="outside"
-                        placeholder=" "
                         label="IPv4アドレス"
                         value={ipv4Addr}
-                        onValueChange={setIpv4Addr}
+                        onChange={(a) => setIpv4Addr(a.target.value)}
                     />
-                    <Spacer y={1} />
-                    <Input
+                    <TextField
                         fullWidth
-                        isClearable
-                        labelPlacement="outside"
-                        placeholder=" "
                         label="NAT64プレフィックス"
                         value={nat64Prefix}
-                        onValueChange={setNat64Prefix}
+                        onChange={(a) =>  setNat64Prefix(a.target.value)}
                     />
-                    <Spacer y={2} />
                     <Button
                         className=""
-                        onPress={() => {
+                        onClick={() => {
 
                         }}
                     >
                         変換
                     </Button>
-                    <Spacer y={2} />
-                    <Input
+                    <TextField
                         fullWidth
-                        isReadOnly
-                        labelPlacement="outside"
                         label="IPv6アドレス"
-                        placeholder="変換ボタンを押すと表示されます"
+                        helperText="変換ボタンを押すと表示されます"
                         value={ipv6Addr}
-                        onValueChange={setIpv6Addr}
-                        endContent={<CopyButton text={ipv6Addr}/>}
+                        onChange={(a) => setIpv6Addr(a.target.value)}
+                        InputProps={{endAdornment: <CopyButton text={ipv6Addr}/>}}
                     />
-                </CardBody>
+                </CardContent>
             </Card>
-            <Spacer y={4} />
-            <Card>
+            <Card elevation={3}>
                 <CardHeader>IPv6アドレスからIPv4アドレス</CardHeader>
-                <CardBody className="place-items-center">
-                    <Input
+                <CardContent className="place-items-center">
+                    <TextField
                         fullWidth
-                        isClearable
-                        labelPlacement="outside"
                         placeholder=" "
                         label="IPv6アドレス"
                         value={ipv6Addr2}
-                        onValueChange={setIpv6Addr2}
+                        onChange={(a) => setIpv6Addr2(a.target.value)}
                     />
-                    <Spacer y={2} />
                     <Button
                         className=""
-                        onPress={() => {
+                        onClick={() => {
 
                         }}
                     >
                         変換
                     </Button>
-                    <Spacer y={2} />
-                    <Input
+                    <TextField
                         fullWidth
-                        isReadOnly
-                        labelPlacement="outside"
+                        disabled
                         label="IPv4アドレス"
-                        placeholder="変換ボタンを押すと表示されます"
+                        helperText="変換ボタンを押すと表示されます"
                         value={ipv4Addr2}
-                        onValueChange={setIpv4Addr2}
-                        endContent={<CopyButton text={ipv4Addr2}/>}
+                        onChange={(a) => setIpv4Addr2(a.target.value)}
+                        InputProps={{endAdornment: <CopyButton text={ipv4Addr2}/>}}
                     />
-                    <Spacer y={1} />
-                    <Input
+                    <TextField
                         fullWidth
-                        isClearable
-                        labelPlacement="outside"
-                        placeholder="変換ボタンを押すと表示されます"
+                        disabled
+                        helperText="変換ボタンを押すと表示されます"
                         label="NAT64プレフィックス"
                         value={nat64Prefix2}
-                        onValueChange={setNat64Prefix2}
-                        endContent={<CopyButton text={nat64Prefix2}/>}
+                        onChange={(a) => setNat64Prefix2(a.target.value)}
+                        InputProps={{endAdornment: <CopyButton text={nat64Prefix2}/>}}
                     />
-                </CardBody>
+                </CardContent>
             </Card>
         </div>
     )
