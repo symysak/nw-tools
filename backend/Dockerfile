@@ -3,7 +3,7 @@ FROM node:20 as builder
 WORKDIR /app
 COPY ./backend/package.json ./package.json
 COPY ./backend/package-lock.json ./package-lock.json
-RUN npm install --production
+RUN npm install --omit=dev
 COPY ./backend .
 RUN npm run build
 
@@ -12,7 +12,7 @@ FROM node:20 as deps
 WORKDIR /app
 COPY ./backend/package.json ./package.json
 COPY ./backend/package-lock.json ./package-lock.json
-RUN npm install --production
+RUN npm install --omit=dev
 
 # 本番環境
 FROM gcr.io/distroless/nodejs20-debian11
