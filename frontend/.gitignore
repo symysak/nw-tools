@@ -11,6 +11,7 @@
 
 # production
 /dist
+.vercel
 
 # misc
 .DS_Store
