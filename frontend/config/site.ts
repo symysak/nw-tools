@@ -24,6 +24,10 @@ export const siteConfig = {
 			label: "NAT64アドレス計算機",
 			href: "/nat64-calculator",
 		},
+		{
+			label: "自分のIPアドレス確認",
+			href: "/my-ip",
+		},
 	],
 	navMenuItems: [
 		{
@@ -41,6 +45,10 @@ export const siteConfig = {
 		{
 			label: "NAT64アドレス計算機",
 			href: "/nat64-calculator",
+		},
+		{
+			label: "自分のIPアドレス確認",
+			href: "/my-ip",
 		},
 	],
 	links: {
