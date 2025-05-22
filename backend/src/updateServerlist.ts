@@ -29,7 +29,7 @@ const getData = async () => {
     }
 }
 
-const ipInfo = async (ip: string) => {
+export const ipInfo = async (ip: string) => {
     const url = process.env.IPINFOIO_API_URL + ip + "?token=" + process.env.IPINFOIO_API_TOKEN;
     if(ip !== "error"){
         try {
