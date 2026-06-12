@@ -1,0 +1,17 @@
+name = "nw-tools-backend"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "e5b9ffc848dd42f4933c7bf78a737572"
+
+[vars]
+IPINFOIO_API_URL = "https://ipinfo.io/"
+# IPINFOIO_API_TOKEN is a secret — set it with: wrangler secret put IPINFOIO_API_TOKEN
+
+[observability]
+enabled = true
+
+[triggers]
+crons = ["*/10 * * * *"]
