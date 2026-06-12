@@ -1,0 +1,10 @@
+{
+	"name": "nw-tools",
+	"version": "1.0.0",
+	"workspaces": [
+		"packages/*"
+	],
+	"devDependencies": {
+		"@biomejs/biome": "2.4.16"
+	}
+}
