@@ -120,19 +120,38 @@ const processServer = async (server: SpeedtestServer, env: Env) => {
 
 export async function updateServerlist(env: Env): Promise<void> {
 	const servers = await fetchServers();
-	if (servers === null) return;
+	if (servers === null) {
+		await env.CACHE.put(
+			"serverlist_error",
+			JSON.stringify({
+				time: new Date().toISOString(),
+				error: "Failed to fetch speedtest server list",
+			}),
+		);
+		return;
+	}
 
 	const japanServers = servers.filter((s) => s.country === "Japan");
 
-	const results = [];
-	for (let i = 0; i < japanServers.length; i += BATCH_SIZE) {
-		const batch = japanServers.slice(i, i + BATCH_SIZE);
-		const batchResults = await Promise.all(
-			batch.map((s) => processServer(s, env)),
-		);
-		results.push(...batchResults.filter((r) => r !== null));
-	}
+	try {
+		const results = [];
+		for (let i = 0; i < japanServers.length; i += BATCH_SIZE) {
+			const batch = japanServers.slice(i, i + BATCH_SIZE);
+			const batchResults = await Promise.all(
+				batch.map((s) => processServer(s, env)),
+			);
+			results.push(...batchResults.filter((r) => r !== null));
+		}
 
-	results.push({ lastupdated: new Date().toISOString() });
-	await env.CACHE.put("serverlist", JSON.stringify(results));
+		results.push({ lastupdated: new Date().toISOString() });
+		await env.CACHE.put("serverlist", JSON.stringify(results));
+	} catch (e) {
+		await env.CACHE.put(
+			"serverlist_error",
+			JSON.stringify({
+				time: new Date().toISOString(),
+				error: e instanceof Error ? e.message : String(e),
+			}),
+		);
+	}
 }
