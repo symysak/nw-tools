@@ -167,7 +167,7 @@ function SpeedtestNetServerlist() {
 					</div>
 					{lastUpdated && (
 						<p className="text-xs text-muted-foreground mt-2">
-							最終更新: {lastUpdated} (UTC). 1時間毎に更新
+							最終更新: {lastUpdated} (UTC). 10分毎に更新
 						</p>
 					)}
 				</>
