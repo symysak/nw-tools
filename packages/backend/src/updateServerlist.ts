@@ -1,3 +1,7 @@
+interface ApiRes {
+	servers: SpeedtestServer[];
+}
+
 interface SpeedtestServer {
 	id: number;
 	sponsor: string;
@@ -19,7 +23,8 @@ type Env = {
 };
 
 const SPEEDTEST_API_URL =
-	"https://www.speedtest.net/api/js/servers?search=japan&limit=100";
+	// "https://www.speedtest.net/api/js/servers?search=japan&limit=100";
+	"https://www.speedtest.net/api/js/config-sdk?engine=js&country=japan&limit=100";
 const BATCH_SIZE = 3;
 
 const getIp = async (host: string, family: 4 | 6): Promise<string> => {
@@ -63,7 +68,7 @@ const fetchServers = async (): Promise<SpeedtestServer[]> => {
 	const res = await fetch(SPEEDTEST_API_URL);
 	if (!res.ok)
 		throw new Error(`speedtest API error: ${res.status} ${await res.text()}`);
-	return (await res.json()) as SpeedtestServer[];
+	return ((await res.json()) as ApiRes).servers;
 };
 
 const resolveRedirect = async (url: string): Promise<string> => {
