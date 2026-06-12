@@ -1,18 +1,16 @@
 {
-  "projectName": "nw-tools-ui",
-  "mode": "file-router",
-  "typescript": true,
-  "packageManager": "bun",
-  "includeExamples": false,
-  "tailwind": true,
-  "addOnOptions": {},
-  "envVarValues": {},
-  "git": false,
-  "install": true,
-  "routerOnly": false,
-  "version": 1,
-  "framework": "react",
-  "chosenAddOns": [
-    "cloudflare"
-  ]
+	"projectName": "nw-tools-ui",
+	"mode": "file-router",
+	"typescript": true,
+	"packageManager": "bun",
+	"includeExamples": false,
+	"tailwind": true,
+	"addOnOptions": {},
+	"envVarValues": {},
+	"git": false,
+	"install": true,
+	"routerOnly": false,
+	"version": 1,
+	"framework": "react",
+	"chosenAddOns": ["cloudflare"]
 }
