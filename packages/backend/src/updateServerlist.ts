@@ -62,7 +62,8 @@ const ipInfo = async (ip: string, env: Env): Promise<IpInfo> => {
 const fetchServers = async (): Promise<SpeedtestServer[] | null> => {
 	try {
 		const res = await fetch(SPEEDTEST_API_URL);
-		if (!res.ok) throw new Error("speedtest API error");
+		if (!res.ok)
+			throw new Error(`speedtest API error: ${res.status} ${await res.text()}`);
 		return (await res.json()) as SpeedtestServer[];
 	} catch {
 		return null;
