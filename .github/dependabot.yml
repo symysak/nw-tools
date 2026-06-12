@@ -1,21 +1,47 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+    - package-ecosystem: "bun"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      cooldown:
+        default-days: 7
+      groups:
+        minor-and-patch:
+            applies-to: version-updates
+            update-types:
+            - "minor"
+            - "patch"
 
-  - package-ecosystem: "npm"
-    directory: "/packages/ui"
-    schedule:
-      interval: "weekly"
+    - package-ecosystem: "bun"
+      directory: "/packages/backend"
+      schedule:
+          interval: "daily"
+      cooldown:
+        default-days: 7
+      groups:
+        minor-and-patch:
+            applies-to: version-updates
+            update-types:
+            - "minor"
+            - "patch"
 
-  - package-ecosystem: "npm"
-    directory: "/packages/backend"
-    schedule:
-      interval: "weekly"
+    - package-ecosystem: "bun"
+      directory: "/packages/ui"
+      schedule:
+          interval: "daily"
+      cooldown:
+        default-days: 7
+      groups:
+        minor-and-patch:
+            applies-to: version-updates
+            update-types:
+            - "minor"
+            - "patch"
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      cooldown:
+        default-days: 7

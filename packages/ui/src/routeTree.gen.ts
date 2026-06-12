@@ -8,149 +8,149 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as SpeedtestNetServerlistRouteImport } from "./routes/speedtest-net-serverlist";
-import { Route as Nat64CalculatorRouteImport } from "./routes/nat64-calculator";
-import { Route as MtuCalculatorRouteImport } from "./routes/mtu-calculator";
-import { Route as IpAddrTableRouteImport } from "./routes/ip-addr-table";
-import { Route as IndexRouteImport } from "./routes/index";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpeedtestNetServerlistRouteImport } from './routes/speedtest-net-serverlist'
+import { Route as Nat64CalculatorRouteImport } from './routes/nat64-calculator'
+import { Route as MtuCalculatorRouteImport } from './routes/mtu-calculator'
+import { Route as IpAddrTableRouteImport } from './routes/ip-addr-table'
+import { Route as IndexRouteImport } from './routes/index'
 
 const SpeedtestNetServerlistRoute = SpeedtestNetServerlistRouteImport.update({
-	id: "/speedtest-net-serverlist",
-	path: "/speedtest-net-serverlist",
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/speedtest-net-serverlist',
+  path: '/speedtest-net-serverlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Nat64CalculatorRoute = Nat64CalculatorRouteImport.update({
-	id: "/nat64-calculator",
-	path: "/nat64-calculator",
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/nat64-calculator',
+  path: '/nat64-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MtuCalculatorRoute = MtuCalculatorRouteImport.update({
-	id: "/mtu-calculator",
-	path: "/mtu-calculator",
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/mtu-calculator',
+  path: '/mtu-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IpAddrTableRoute = IpAddrTableRouteImport.update({
-	id: "/ip-addr-table",
-	path: "/ip-addr-table",
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/ip-addr-table',
+  path: '/ip-addr-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
-	"/": typeof IndexRoute;
-	"/ip-addr-table": typeof IpAddrTableRoute;
-	"/mtu-calculator": typeof MtuCalculatorRoute;
-	"/nat64-calculator": typeof Nat64CalculatorRoute;
-	"/speedtest-net-serverlist": typeof SpeedtestNetServerlistRoute;
+  '/': typeof IndexRoute
+  '/ip-addr-table': typeof IpAddrTableRoute
+  '/mtu-calculator': typeof MtuCalculatorRoute
+  '/nat64-calculator': typeof Nat64CalculatorRoute
+  '/speedtest-net-serverlist': typeof SpeedtestNetServerlistRoute
 }
 export interface FileRoutesByTo {
-	"/": typeof IndexRoute;
-	"/ip-addr-table": typeof IpAddrTableRoute;
-	"/mtu-calculator": typeof MtuCalculatorRoute;
-	"/nat64-calculator": typeof Nat64CalculatorRoute;
-	"/speedtest-net-serverlist": typeof SpeedtestNetServerlistRoute;
+  '/': typeof IndexRoute
+  '/ip-addr-table': typeof IpAddrTableRoute
+  '/mtu-calculator': typeof MtuCalculatorRoute
+  '/nat64-calculator': typeof Nat64CalculatorRoute
+  '/speedtest-net-serverlist': typeof SpeedtestNetServerlistRoute
 }
 export interface FileRoutesById {
-	__root__: typeof rootRouteImport;
-	"/": typeof IndexRoute;
-	"/ip-addr-table": typeof IpAddrTableRoute;
-	"/mtu-calculator": typeof MtuCalculatorRoute;
-	"/nat64-calculator": typeof Nat64CalculatorRoute;
-	"/speedtest-net-serverlist": typeof SpeedtestNetServerlistRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/ip-addr-table': typeof IpAddrTableRoute
+  '/mtu-calculator': typeof MtuCalculatorRoute
+  '/nat64-calculator': typeof Nat64CalculatorRoute
+  '/speedtest-net-serverlist': typeof SpeedtestNetServerlistRoute
 }
 export interface FileRouteTypes {
-	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths:
-		| "/"
-		| "/ip-addr-table"
-		| "/mtu-calculator"
-		| "/nat64-calculator"
-		| "/speedtest-net-serverlist";
-	fileRoutesByTo: FileRoutesByTo;
-	to:
-		| "/"
-		| "/ip-addr-table"
-		| "/mtu-calculator"
-		| "/nat64-calculator"
-		| "/speedtest-net-serverlist";
-	id:
-		| "__root__"
-		| "/"
-		| "/ip-addr-table"
-		| "/mtu-calculator"
-		| "/nat64-calculator"
-		| "/speedtest-net-serverlist";
-	fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/ip-addr-table'
+    | '/mtu-calculator'
+    | '/nat64-calculator'
+    | '/speedtest-net-serverlist'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/ip-addr-table'
+    | '/mtu-calculator'
+    | '/nat64-calculator'
+    | '/speedtest-net-serverlist'
+  id:
+    | '__root__'
+    | '/'
+    | '/ip-addr-table'
+    | '/mtu-calculator'
+    | '/nat64-calculator'
+    | '/speedtest-net-serverlist'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-	IndexRoute: typeof IndexRoute;
-	IpAddrTableRoute: typeof IpAddrTableRoute;
-	MtuCalculatorRoute: typeof MtuCalculatorRoute;
-	Nat64CalculatorRoute: typeof Nat64CalculatorRoute;
-	SpeedtestNetServerlistRoute: typeof SpeedtestNetServerlistRoute;
+  IndexRoute: typeof IndexRoute
+  IpAddrTableRoute: typeof IpAddrTableRoute
+  MtuCalculatorRoute: typeof MtuCalculatorRoute
+  Nat64CalculatorRoute: typeof Nat64CalculatorRoute
+  SpeedtestNetServerlistRoute: typeof SpeedtestNetServerlistRoute
 }
 
-declare module "@tanstack/react-router" {
-	interface FileRoutesByPath {
-		"/speedtest-net-serverlist": {
-			id: "/speedtest-net-serverlist";
-			path: "/speedtest-net-serverlist";
-			fullPath: "/speedtest-net-serverlist";
-			preLoaderRoute: typeof SpeedtestNetServerlistRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		"/nat64-calculator": {
-			id: "/nat64-calculator";
-			path: "/nat64-calculator";
-			fullPath: "/nat64-calculator";
-			preLoaderRoute: typeof Nat64CalculatorRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		"/mtu-calculator": {
-			id: "/mtu-calculator";
-			path: "/mtu-calculator";
-			fullPath: "/mtu-calculator";
-			preLoaderRoute: typeof MtuCalculatorRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		"/ip-addr-table": {
-			id: "/ip-addr-table";
-			path: "/ip-addr-table";
-			fullPath: "/ip-addr-table";
-			preLoaderRoute: typeof IpAddrTableRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		"/": {
-			id: "/";
-			path: "/";
-			fullPath: "/";
-			preLoaderRoute: typeof IndexRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-	}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/speedtest-net-serverlist': {
+      id: '/speedtest-net-serverlist'
+      path: '/speedtest-net-serverlist'
+      fullPath: '/speedtest-net-serverlist'
+      preLoaderRoute: typeof SpeedtestNetServerlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nat64-calculator': {
+      id: '/nat64-calculator'
+      path: '/nat64-calculator'
+      fullPath: '/nat64-calculator'
+      preLoaderRoute: typeof Nat64CalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mtu-calculator': {
+      id: '/mtu-calculator'
+      path: '/mtu-calculator'
+      fullPath: '/mtu-calculator'
+      preLoaderRoute: typeof MtuCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ip-addr-table': {
+      id: '/ip-addr-table'
+      path: '/ip-addr-table'
+      fullPath: '/ip-addr-table'
+      preLoaderRoute: typeof IpAddrTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-	IndexRoute: IndexRoute,
-	IpAddrTableRoute: IpAddrTableRoute,
-	MtuCalculatorRoute: MtuCalculatorRoute,
-	Nat64CalculatorRoute: Nat64CalculatorRoute,
-	SpeedtestNetServerlistRoute: SpeedtestNetServerlistRoute,
-};
+  IndexRoute: IndexRoute,
+  IpAddrTableRoute: IpAddrTableRoute,
+  MtuCalculatorRoute: MtuCalculatorRoute,
+  Nat64CalculatorRoute: Nat64CalculatorRoute,
+  SpeedtestNetServerlistRoute: SpeedtestNetServerlistRoute,
+}
 export const routeTree = rootRouteImport
-	._addFileChildren(rootRouteChildren)
-	._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx";
-import type { createStart } from "@tanstack/react-start";
-declare module "@tanstack/react-start" {
-	interface Register {
-		ssr: true;
-		router: Awaited<ReturnType<typeof getRouter>>;
-	}
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
 }

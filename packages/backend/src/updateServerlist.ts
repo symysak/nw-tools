@@ -69,12 +69,8 @@ const getData = async (): Promise<SpeedtestServer[]> => {
 
 const getUrl = async (url: string): Promise<string> => {
 	try {
-		const res = await fetch(url, { redirect: "manual" });
-		if (res.status >= 300 && res.status < 400) {
-			const location = res.headers.get("Location");
-			if (location) return new URL(location, url).href;
-		}
-		return "";
+		const res = await fetch(url, { redirect: "follow" });
+		return res.redirected ? res.url : "";
 	} catch {
 		return "";
 	}
