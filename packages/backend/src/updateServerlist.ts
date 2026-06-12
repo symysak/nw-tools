@@ -20,7 +20,7 @@ type Env = {
 
 const SPEEDTEST_API_URL =
 	"https://www.speedtest.net/api/js/servers?search=japan&limit=100";
-const BATCH_SIZE = 10;
+const BATCH_SIZE = 3;
 
 const getIp = async (host: string, family: 4 | 6): Promise<string> => {
 	const type = family === 4 ? "A" : "AAAA";
@@ -70,18 +70,21 @@ const fetchServers = async (): Promise<SpeedtestServer[] | null> => {
 };
 
 const resolveRedirect = async (url: string): Promise<string> => {
-	try {
-		const res = await fetch(url, { redirect: "follow" });
-		return res.redirected ? res.url : "";
-	} catch {
-		return "";
+	for (let attempt = 0; attempt < 3; attempt++) {
+		try {
+			const res = await fetch(url, { redirect: "manual" });
+			const location = res.headers.get("Location");
+			if (location) return new URL(location, url).href;
+			// リダイレクトなしの正常応答は再試行しても変わらない
+			if (res.status < 500) return "";
+		} catch {
+			// ネットワークエラーは再試行
+		}
 	}
+	return "";
 };
 
-const processServer = async (
-	server: SpeedtestServer,
-	env: Env,
-) => {
+const processServer = async (server: SpeedtestServer, env: Env) => {
 	let host: string;
 	try {
 		host = new URL(server.url).hostname;
