@@ -59,15 +59,11 @@ const ipInfo = async (ip: string, env: Env): Promise<IpInfo> => {
 	}
 };
 
-const fetchServers = async (): Promise<SpeedtestServer[] | null> => {
-	try {
-		const res = await fetch(SPEEDTEST_API_URL);
-		if (!res.ok)
-			throw new Error(`speedtest API error: ${res.status} ${await res.text()}`);
-		return (await res.json()) as SpeedtestServer[];
-	} catch {
-		return null;
-	}
+const fetchServers = async (): Promise<SpeedtestServer[]> => {
+	const res = await fetch(SPEEDTEST_API_URL);
+	if (!res.ok)
+		throw new Error(`speedtest API error: ${res.status} ${await res.text()}`);
+	return (await res.json()) as SpeedtestServer[];
 };
 
 const resolveRedirect = async (url: string): Promise<string> => {
@@ -120,13 +116,15 @@ const processServer = async (server: SpeedtestServer, env: Env) => {
 };
 
 export async function updateServerlist(env: Env): Promise<void> {
-	const servers = await fetchServers();
-	if (servers === null) {
+	let servers: SpeedtestServer[] = [];
+	try {
+		servers = await fetchServers();
+	} catch (e) {
 		await env.CACHE.put(
 			"serverlist_error",
 			JSON.stringify({
 				time: new Date().toISOString(),
-				error: "Failed to fetch speedtest server list",
+				error: e instanceof Error ? e.message : String(e),
 			}),
 		);
 		return;
