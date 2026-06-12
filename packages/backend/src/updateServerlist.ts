@@ -18,6 +18,10 @@ type Env = {
 	IPINFOIO_API_URL: string;
 };
 
+const SPEEDTEST_API_URL =
+	"https://www.speedtest.net/api/js/servers?search=japan&limit=100";
+const BATCH_SIZE = 10;
+
 const getIp = async (host: string, family: 4 | 6): Promise<string> => {
 	const type = family === 4 ? "A" : "AAAA";
 	try {
@@ -55,19 +59,17 @@ const ipInfo = async (ip: string, env: Env): Promise<IpInfo> => {
 	}
 };
 
-const getData = async (): Promise<SpeedtestServer[]> => {
+const fetchServers = async (): Promise<SpeedtestServer[] | null> => {
 	try {
-		const res = await fetch(
-			"https://www.speedtest.net/api/js/servers?search=japan&limit=100",
-		);
+		const res = await fetch(SPEEDTEST_API_URL);
 		if (!res.ok) throw new Error("speedtest API error");
 		return (await res.json()) as SpeedtestServer[];
 	} catch {
-		return [];
+		return null;
 	}
 };
 
-const getUrl = async (url: string): Promise<string> => {
+const resolveRedirect = async (url: string): Promise<string> => {
 	try {
 		const res = await fetch(url, { redirect: "follow" });
 		return res.redirected ? res.url : "";
@@ -76,16 +78,21 @@ const getUrl = async (url: string): Promise<string> => {
 	}
 };
 
-const processServer = async (server: SpeedtestServer, env: Env) => {
-	const fqdn = server.url
-		.replace("http://", "")
-		.replace("https://", "")
-		.replace(":8080/speedtest/upload.php", "");
+const processServer = async (
+	server: SpeedtestServer,
+	env: Env,
+) => {
+	let host: string;
+	try {
+		host = new URL(server.url).hostname;
+	} catch {
+		return null;
+	}
 
 	const [ipv4Addr, ipv6Addr, website] = await Promise.all([
-		getIp(fqdn, 4),
-		getIp(fqdn, 6),
-		getUrl(
+		getIp(host, 4),
+		getIp(host, 6),
+		resolveRedirect(
 			`https://www.speedtest.net/api/js/perform-redirect?server_id=${server.id}`,
 		),
 	]);
@@ -100,7 +107,7 @@ const processServer = async (server: SpeedtestServer, env: Env) => {
 		name: server.sponsor,
 		location: server.name,
 		website,
-		host: `${fqdn}:8080`,
+		host: `${host}:8080`,
 		ipv4: `${ipv4Info.ip}(${ipv4Info.hostname})`,
 		ipv6: `${ipv6Info.ip}(${ipv6Info.hostname})`,
 		ipv4_asn: ipv4Info.org,
@@ -109,17 +116,18 @@ const processServer = async (server: SpeedtestServer, env: Env) => {
 };
 
 export async function updateServerlist(env: Env): Promise<void> {
-	const servers = await getData();
+	const servers = await fetchServers();
+	if (servers === null) return;
+
 	const japanServers = servers.filter((s) => s.country === "Japan");
 
-	const BATCH_SIZE = 10;
 	const results = [];
 	for (let i = 0; i < japanServers.length; i += BATCH_SIZE) {
 		const batch = japanServers.slice(i, i + BATCH_SIZE);
 		const batchResults = await Promise.all(
 			batch.map((s) => processServer(s, env)),
 		);
-		results.push(...batchResults);
+		results.push(...batchResults.filter((r) => r !== null));
 	}
 
 	results.push({ lastupdated: new Date().toISOString() });
