@@ -19,7 +19,8 @@ type Env = {
 };
 
 const SPEEDTEST_API_URL =
-	"https://www.speedtest.net/api/js/servers?search=japan&limit=100";
+	// "https://www.speedtest.net/api/js/servers?search=japan&limit=100";
+	"https://mi.ax/ohkura.json";
 const BATCH_SIZE = 3;
 
 const getIp = async (host: string, family: 4 | 6): Promise<string> => {
